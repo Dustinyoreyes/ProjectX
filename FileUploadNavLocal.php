@@ -64,7 +64,8 @@ function myFunction() {
          </li>
       </ul>
    </li>
-   <li><a href='#'><span>About</span></a></li>
+   <li><a href='dataInputForm.php'><span>Data Input Form</span></a></li>
+   <li><a href='about.php'><span>About</span></a></li>
    <li class='last'><a href="mailto:wongdustin529@gmail.com?Subject=Hello%20again" target="_top"><span>Contact Admin</span></a></li>
 </ul>
 </div>

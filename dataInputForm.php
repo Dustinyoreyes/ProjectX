@@ -8,14 +8,24 @@
    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
    <script src="script.js"></script>
-   <title>CSS MenuMaker</title>
-	
+   <title>CSS MenuMaker</title>	
 </head>
+
+<style>
+table, th,td {
+		border: 1px solid black;
+		border-collapse: collapse;
+}
+th,td {
+	padding: 5px;
+}
+</style>
+
 
 <body id="body">
 <header id="header">
 <div>
-<h1>Upload to database</h1>
+<h1>Data Input Form</h1>
 </div>
 
 <!-- HTML for SEARCH BAR -->
@@ -25,7 +35,6 @@
 		</form>
 	<div class="tfclear"></div>
 	</div>
-
 
 <div id="print">
 <button onclick="myFunction()">Print this page</button>
@@ -38,30 +47,31 @@ function myFunction() {
 
 </header>
 
-
-
 <aside id="asidemenu">
 <div id='cssmenu'>
 <ul>
    <li><a href="index.php"><span>Home</span></a></li>
    <li class='active has-sub'><a href='#'><span>File Upload</span></a>
       <ul>
-         <li class='has-sub'><span><a href="index.php">Upload to database</span></a>
-         <!--
+         <li class='has-sub'><span><a href="FileUploadNavDatabase.php">Upload to database</span></a>
+            <!--
 			<ul>
                <li><a href='#'><span>Sub Product</span></a></li>
                <li class='last'><a href='#'><span>Sub Product</span></a></li>
             </ul>
-         -->
-		 </li>
+			-->
+			
+         </li>
          <li class='has-sub'><span><a href="FileUploadNavLocal.php">Upload to local server</span></a>
-		 <!--
-            <ul>
+            
+			<!--
+			<ul>
                <li><a href='#'><span>Sub Product</span></a></li>
                <li class='last'><a href='#'><span>Sub Product</span></a></li>
             </ul>
-         -->
-		 </li>
+			-->
+			
+         </li>
       </ul>
    </li>
    <li><a href='dataInputForm.php'><span>Data Input Form</span></a></li>
@@ -71,20 +81,62 @@ function myFunction() {
 </div>
 </aside>
 
-<section id="section">
-<div>
-    <form action="add_file.php" method="post" enctype="multipart/form-data">
-		<!--forecast DB/customer-->
-       <h3> Select file and upload to forecast DB:</h3>
-		<input type="file" name="uploaded_file" id="file"><br>
-		<br>
-        <input type="submit" value="Upload File" id="submit">
-    </form>
-<p>
-<a href="list_files.php">See all files</a>
-</p>
-</div>
+<section id= "section">
+<br>
+Under construction
+<br>
+<?php 
+$contractAdmin = $customerName = $orderNumb = "";
+if($_SERVER["REQUEST_METHOD"] == "POST") {
+	
+$contractAdmin = test_input ($_POST["CA"]);
+$customerName = test_input ($_POST["CN"]);
+$orderNumb = test_input ($_POST["OrderNumb"]);
+}
+
+function test_input($data) {
+	$data = trim($data);
+	$data = stripslashes($data);
+	$data = htmlspecialchars($data);
+	return $data;
+	
+}
+?>
+
+<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" enctype="multipart/form-data">
+Today's Date:
+<?php
+echo date("d/m/Y");
+?>
+<br>
+Contract Admin: <input type="text" method="post" name="CA"></input>
+<br><br>
+Customer Name: <input type="text" method="post" name="CN"></input>
+<br><br>
+Order #: <input type="text" method="post" name="OrderNumb"></input>
+<br><br>
+<input type="submit" value="Update"> 
+</form>
+<br>
+
+<table style="width:50%">
+<tr>
+<th>ID</th>
+<th>Contract Admin</th>
+<th>Customer Name</th>
+<th>Order #</th>
+</tr>
+<td></td>
+<td><?php echo $contractAdmin?></td>
+<td><?php echo $customerName?></td>
+<td><?php echo $orderNumb?></td>
+</table>
+
+
+
 </section>
+
+
 
 <article id="article">
 Article
@@ -95,6 +147,7 @@ Article
 include 'footer.php';
 ?>
 </footer>
+
 
 </body>
 </html>

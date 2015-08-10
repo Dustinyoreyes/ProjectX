@@ -15,7 +15,7 @@
 <body id="body">
 <header id="header">
 <div>
-<h1>Upload to database</h1>
+<h1>About Us</h1>
 </div>
 
 <!-- HTML for SEARCH BAR -->
@@ -25,7 +25,6 @@
 		</form>
 	<div class="tfclear"></div>
 	</div>
-
 
 <div id="print">
 <button onclick="myFunction()">Print this page</button>
@@ -38,30 +37,31 @@ function myFunction() {
 
 </header>
 
-
-
 <aside id="asidemenu">
 <div id='cssmenu'>
 <ul>
    <li><a href="index.php"><span>Home</span></a></li>
    <li class='active has-sub'><a href='#'><span>File Upload</span></a>
       <ul>
-         <li class='has-sub'><span><a href="index.php">Upload to database</span></a>
-         <!--
+         <li class='has-sub'><span><a href="FileUploadNavDatabase.php">Upload to database</span></a>
+            <!--
 			<ul>
                <li><a href='#'><span>Sub Product</span></a></li>
                <li class='last'><a href='#'><span>Sub Product</span></a></li>
             </ul>
-         -->
-		 </li>
+			-->
+			
+         </li>
          <li class='has-sub'><span><a href="FileUploadNavLocal.php">Upload to local server</span></a>
-		 <!--
-            <ul>
+            
+			<!--
+			<ul>
                <li><a href='#'><span>Sub Product</span></a></li>
                <li class='last'><a href='#'><span>Sub Product</span></a></li>
             </ul>
-         -->
-		 </li>
+			-->
+			
+         </li>
       </ul>
    </li>
    <li><a href='dataInputForm.php'><span>Data Input Form</span></a></li>
@@ -71,20 +71,14 @@ function myFunction() {
 </div>
 </aside>
 
-<section id="section">
-<div>
-    <form action="add_file.php" method="post" enctype="multipart/form-data">
-		<!--forecast DB/customer-->
-       <h3> Select file and upload to forecast DB:</h3>
-		<input type="file" name="uploaded_file" id="file"><br>
-		<br>
-        <input type="submit" value="Upload File" id="submit">
-    </form>
-<p>
-<a href="list_files.php">See all files</a>
-</p>
-</div>
+<section id= "section">
+<br>
+Under construction
+<br>
+
 </section>
+
+
 
 <article id="article">
 Article
@@ -95,6 +89,7 @@ Article
 include 'footer.php';
 ?>
 </footer>
+
 
 </body>
 </html>
