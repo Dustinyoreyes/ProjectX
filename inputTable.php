@@ -1,61 +1,76 @@
+<!DOCTYPE html>
+<head>
+    <title>Return Home</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="styles.css">
+   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+   <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+   <script src="script.js"></script>
+   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+<body>
+<p>
+      <button onclick="location.href = 'http://localhost/projectx/index.php#';" id="myButton">Return home</button>
+</p>
+
+<script type="text/javascript">
+    document.getElementById("myButton").onclick = function () {
+        location.href = "http://localhost/projectx/index.php#";
+    };
+</script>
+
+
 <?php
- 
- // Connect to the database
-$dbLink = new mysqli('127.0.0.1', 'root', '', 'namelist');
-if(mysqli_connect_errno()) {
-    die("MySQL connection failed: ". mysqli_connect_error());
+$conn = new mysqli('127.0.0.1', 'root', '', 'forecast');
+if (!$conn) {
+	die('Connection failed');
+} 
+echo 'Successful connection.';
+
+$contractAdmin = $customerName = $orderNumb = "";
+if($_SERVER["REQUEST_METHOD"] == "POST") {
+	
+$contractAdmin = test_input ($_POST["contractAdmin"]);
+$customerName = test_input ($_POST["customerName"]);
+$orderNumb = test_input ($_POST["orderNumb"]);
 }
- 
-// Query for a list of all existing files
-$sql = 'SELECT `id`, `contractAdmin`, `customerName`, `orderNumb`, `created` FROM `namelist`';
-$result = $dbLink->query($sql);
- 
-// Check if it was successful
-if($result) {
-    // Make sure there are some files in there
-    if($result->num_rows == 0) {
-        echo '<p>There are no files in the database</p>';
-    }
-    else {
-        // Print the top of a table
-        echo '<table width="80%">
-                <tr>
-                    <td><b>ID</b></td>
-                    <td><b>Contract Admin</b></td>
-                    <td><b>Customer Name</b></td>
-                    <td><b>Order Number</b></td>
-                    <td><b>Created</b></td>
-                </tr>';
- 
-        // Print each file
-        while($row = $result->fetch_assoc()) {
-            echo "
-                <tr>
-                    <td>{$row['id']}</td>
-                    <td>{$row['contractAdmin']}</td>
-                    <td>{$row['customerName']}</td>
-					<td>{$row['orderNumb']}</td>
-                    <td>{$row['created']}</td>
-                </tr>";
-        }
- 
-        // Close table
-        echo '</table>';
-    }
- 
-    // Free the result
-    $result->free();
+
+function test_input($data) {
+	$data = trim($data);
+	$data = stripslashes($data);
+	$data = htmlspecialchars($data);
+	return $data;
 }
-else
-{
-    echo 'Error! SQL query failed:';
-    echo "<pre>{$dbLink->error}</pre>";
+
+$sql = "INSERT INTO namelist (contractAdmin,customerName,orderNumb,created) VALUES ('$contractAdmin','$customerName','$orderNumb',NOW())";
+
+if ($conn->query($sql) === TRUE) { 
+echo " New record was created successfully";} else { echo "Error: ". $sql . "<br>" . $conn->error;
+
 }
- 
-// Close the mysql connection
-$dbLink->close();
- 
- 
- 
- 
- ?>
+
+$conn->close();
+
+
+
+
+?>
+
+
+ <p>
+      <button onclick="location.href = 'http://localhost/projectx/dataInputForm.php';" id="myButton">Return to Data Input Form</button>
+</p>
+
+<script type="text/javascript">
+    document.getElementById("myButton").onclick = function () {
+        location.href = "http://localhost/projectx/dataInputForm.php";
+    };
+</script>
+	
+	
+</body>
+</html>

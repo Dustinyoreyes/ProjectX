@@ -8,6 +8,11 @@
    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
    <script src="script.js"></script>
+   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+   <script src="searching_plugin.js"></script>
    <title>CSS MenuMaker</title>	
 </head>
 
@@ -25,26 +30,16 @@ th,td {
 <body id="body">
 <header id="header">
 <div>
-<h1>Data Input Form</h1>
+<h1 id="headtitle">Data Input Form</h1>
 </div>
 
 <!-- HTML for SEARCH BAR -->
-	<div id="tfheader">
-		<form id="tfnewsearch" method="get" action="http://www.google.com">
+	<div id="tfheader" style="color:black">
+		<form id="tfnewsearch" method="get" action=">
 		        <input type="text" class="tftextinput" name="q" size="21" maxlength="120"><input type="submit" value="search" class="tfbutton">
 		</form>
 	<div class="tfclear"></div>
 	</div>
-
-<div id="print">
-<button onclick="myFunction()">Print this page</button>
-<script>
-function myFunction() {
-    window.print();
-}
-</script>
-</div>
-
 </header>
 
 <aside id="asidemenu">
@@ -75,63 +70,46 @@ function myFunction() {
       </ul>
    </li>
    <li><a href='dataInputForm.php'><span>Data Input Form</span></a></li>
-   <li><a href='about.php'><span>About</span></a></li>
+   <li><a href='about.php'><span>Tasks</span></a></li>
    <li class='last'><a href="mailto:wongdustin529@gmail.com?Subject=Hello%20again" target="_top"><span>Contact Admin</span></a></li>
 </ul>
 </div>
 </aside>
 
 <section id= "section">
-<br>
+
+<div id="print">
+<span class="glyphicon glyphicon-print"></span>
+<button onclick="myFunction()" style="color:black">Print this page</button>
+<script>
+function myFunction() {
+    window.print();
+}
+</script>
+</div>
 Under construction
 <br>
-<?php 
-$contractAdmin = $customerName = $orderNumb = "";
-if($_SERVER["REQUEST_METHOD"] == "POST") {
-	
-$contractAdmin = test_input ($_POST["CA"]);
-$customerName = test_input ($_POST["CN"]);
-$orderNumb = test_input ($_POST["OrderNumb"]);
-}
 
-function test_input($data) {
-	$data = trim($data);
-	$data = stripslashes($data);
-	$data = htmlspecialchars($data);
-	return $data;
-	
-}
-?>
 
-<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" enctype="multipart/form-data">
+<form action="inputTable.php" method="post" enctype="multipart/form-data">
 Today's Date:
 <?php
-echo date("d/m/Y");
+date_default_timezone_set('America/Los_Angeles');
+echo date("m/d/y");
 ?>
 <br>
-Contract Admin: <input type="text" method="post" name="CA"></input>
+Contract Admin: <input type="text" method="post" name="contractAdmin"></input>
 <br><br>
-Customer Name: <input type="text" method="post" name="CN"></input>
+Customer Name: <input type="text" method="post" name="customerName"></input>
 <br><br>
-Order #: <input type="text" method="post" name="OrderNumb"></input>
+Order #: <input type="text" method="post" name="orderNumb"></input>
 <br><br>
 <input type="submit" value="Update"> 
 </form>
 <br>
 
-<table style="width:50%">
-<tr>
-<th>ID</th>
-<th>Contract Admin</th>
-<th>Customer Name</th>
-<th>Order #</th>
-</tr>
-<td></td>
-<td><?php echo $contractAdmin?></td>
-<td><?php echo $customerName?></td>
-<td><?php echo $orderNumb?></td>
-</table>
 
+<?php include "tableToWebpage.php"; ?>
 
 
 </section>

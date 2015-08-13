@@ -2,10 +2,15 @@
 <head>
     <title>Return Home</title>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </head>
-<body>
+<body style="background-color:#E6E6E6";>
 <p>
-      <button onclick="location.href = 'http://localhost/projectx/index.php#';" id="myButton">Return home</button>
+      <button onclick="location.href = 'http://localhost/projectx/index.php#';" id="myHomeButton" class="glyphicon glyphicon-home"> Home</button>
 </p>
 
 <script type="text/javascript">
@@ -13,8 +18,7 @@
         location.href = "http://localhost/projectx/index.php#";
     };
 </script>
- 
- 
+
 
  <?php
  
@@ -36,7 +40,7 @@ if($result) {
     }
     else {
         // Print the top of a table
-        echo '<table width="80%">
+        echo '<table width="80%" align="center" border="black">
                 <tr>
                     <td><b>File Name</b></td>
                     <td><b>Mime</b></td>
@@ -80,7 +84,7 @@ $dbLink->close();
  
 
  <p>
-      <button onclick="location.href = 'http://localhost/projectx/index.php#';" id="myButton">Return home</button>
+      <button onclick="location.href = 'http://localhost/projectx/index.php#';" id="myHomeButton" class="glyphicon glyphicon-home"> Home</button>
 </p>
 
 <script type="text/javascript">

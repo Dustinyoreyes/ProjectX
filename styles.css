@@ -1,16 +1,21 @@
 #body {
-background-color: #424852;
+background-color: #262931;
 }
 
 
 #header {
-background-color:#424852;
+background-color:#262931;
 font-family: Helvetica, Arial, sans-serif;
 color:#ffffff;
 text-align:center;
-font-size: 15px;
+font-size: 12px;
 padding:5px;
-border-style:dashed;
+border-style:;
+margin:0;
+}
+
+#headtitle {
+font-size:20px;
 }
 
 #search {
@@ -72,26 +77,29 @@ width: 250px;
 	}
 
 #print {
-float:relative;
+float:right;
 display:inline-block;
+margin-right:15px;
 }
+
 
 #section {
 display:inline;
 display:inherit;
 overflow:auto;
-border-style:solid;
+border-style:double;
 background-color:#E6E6E6;
 padding-left:10px;
 padding-top:10px;
 padding-bottom:200px;
+border-color:;
 }
 
 #main {
 float:left;
 }
 #asidemenu {
-border-style: double;
+border-style:double;
 float:left;
 
 }
@@ -176,14 +184,14 @@ border: 2px solid silver;
   float: right;
 }
 #cssmenu > ul > li > a {
-  padding: 15px 20px;
+  padding: 10px 20px;
   border-left: 1px solid #1682ba;
   border-right: 1px solid #1682ba;
   border-top: 1px solid #1682ba;
   cursor: pointer;
   z-index: 2;
-  font-size: 14px;
-  font-weight: bold;
+  font-size: 15px;
+  font-weight: normal;
   text-decoration: none;
   color: #ffffff;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
@@ -313,4 +321,34 @@ border: 2px solid silver;
 #cssmenu ul ul li.open > a::after,
 #cssmenu ul ul li > a:hover::after {
   border-color: #ffffff;
+}
+
+p, #myHomeButton {
+margin-top:30px;
+margin-left:30px;
+}
+
+#home{
+padding-right:10px; 
+
+}
+
+#fileupload {
+padding-right:10px;
+padding-bottom:4px;
+}
+
+#forminput {
+font-size-adjust:auto;
+padding-right:10px;
+}
+
+#tasks {
+font-size-adjust:auto;
+padding-right:10px;
+}
+
+#contactadmin {
+font-size-adjust:auto;
+padding-right:10px;
 }

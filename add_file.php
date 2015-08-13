@@ -5,7 +5,7 @@
 </head>
 <body>
 <p>
-      <button onclick="location.href = 'http://localhost/projectx/index.php';" id="myButton">Return home</button>
+      <button onclick="location.href = 'http://localhost/projectx/index.php';" id="myHomeButton">Return home</button>
 </p>
 
 <script type="text/javascript">
@@ -139,7 +139,7 @@ $dbLink->close();
 ?>
 
 <p>
-      <button onclick="location.href = 'http://localhost/projectx/index.php';" id="myButton">Return home</button>
+      <button onclick="location.href = 'http://localhost/projectx/index.php';" id="myHomeButton">Return home</button>
 </p>
 
 <script type="text/javascript">
