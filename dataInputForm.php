@@ -34,9 +34,9 @@ th,td {
 </div>
 
 <!-- HTML for SEARCH BAR -->
-	<div id="tfheader" style="color:black">
-		<form id="tfnewsearch" method="get" action=">
-		        <input type="text" class="tftextinput" name="q" size="21" maxlength="120"><input type="submit" value="search" class="tfbutton">
+	<div id="tfheader" style="color:black" class="panel panel-default">
+		<form id="tfnewsearch" method="get" action="https://www.google.com/">
+		        <input type="text" class="tftextinput" name="q" size="21" maxlength="120"><input type="submit" value="Search" class="tfbutton">
 		</form>
 	<div class="tfclear"></div>
 	</div>
@@ -45,8 +45,8 @@ th,td {
 <aside id="asidemenu">
 <div id='cssmenu'>
 <ul>
-   <li><a href="index.php"><span>Home</span></a></li>
-   <li class='active has-sub'><a href='#'><span>File Upload</span></a>
+   <li><a href="index.php"><span id="home" class="glyphicon glyphicon-home"></span> Home</a></li>
+   <li class='active has-sub'><a href='#'><span id="fileupload" class="glyphicon glyphicon-file"></span> File Upload</a>
       <ul>
          <li class='has-sub'><span><a href="FileUploadNavDatabase.php">Upload to database</span></a>
             <!--
@@ -69,9 +69,9 @@ th,td {
          </li>
       </ul>
    </li>
-   <li><a href='dataInputForm.php'><span>Data Input Form</span></a></li>
-   <li><a href='about.php'><span>Tasks</span></a></li>
-   <li class='last'><a href="mailto:wongdustin529@gmail.com?Subject=Hello%20again" target="_top"><span>Contact Admin</span></a></li>
+   <li><a href='dataInputForm.php'><span id="forminput" class="glyphicon glyphicon-list-alt"></span> Form Input</a></li>
+   <li><a href='tasks.php'><span id="tasks" class="glyphicon glyphicon-tasks"></span> Tasks</a></li>
+   <li class='last'><a href="mailto:wongdustin529@gmail.com?Subject=Hello%20again" target="_top"><span id="contactadmin" class="glyphicon glyphicon-envelope"></span> Contact Admin</a></li>
 </ul>
 </div>
 </aside>
@@ -88,33 +88,118 @@ function myFunction() {
 </script>
 </div>
 Under construction
-<br>
+<br><br>
 
 
 <form action="inputTable.php" method="post" enctype="multipart/form-data">
-Today's Date:
+<b>Today's Date:</b>
 <?php
 date_default_timezone_set('America/Los_Angeles');
 echo date("m/d/y");
 ?>
 <br>
-Contract Admin: <input type="text" method="post" name="contractAdmin"></input>
-<br><br>
-Customer Name: <input type="text" method="post" name="customerName"></input>
-<br><br>
-Order #: <input type="text" method="post" name="orderNumb"></input>
-<br><br>
-<input type="submit" value="Update"> 
-</form>
 <br>
-
+<b>Contract Admin:</b> <input type="text" method="post" name="contractAdmin"></input>
+<br><br>
+<b>Customer Name:</b> <input type="text" method="post" name="customerName"></input>
+<br><br>
+<b>Order #:</b> <input type="text" method="post" name="orderNumb"></input>
+<br><br>
+<input type="submit" value="Submit" id="submit"> 
+</form>
+<br><br>
 
 <?php include "tableToWebpage.php"; ?>
+ 
+ 
+<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">  
+  <input type="search" name="search"><input type="submit" value="Search Table">
+</form>  
 
+Search Results:
+<?php 
+ 
+// Connect to the database
+$dbLink = new mysqli('127.0.0.1', 'root', '', 'forecast');
+if(mysqli_connect_errno()) {
+    die("MySQL connection failed: ". mysqli_connect_error());
+} 
 
+$search = "";
+
+if($_SERVER["REQUEST_METHOD"] == "POST") {
+$search = mysqli_real_escape_string($dbLink,$_POST["search"]);	
+$search = test_input ($_POST["search"]);
+}
+function test_input($data) {
+	$data = trim($data);
+	$data = stripslashes($data);
+	$data = htmlspecialchars($data);
+	return $data;
+}
+
+echo $search;
+
+$query = "SELECT * FROM namelist WHERE 
+id LIKE '%{$search}%' OR
+contractAdmin LIKE '%{$search}%' OR
+customerName LIKE '%{$search}%' OR
+orderNumb LIKE '%{$search}%' OR 
+created LIKE '%{$search}%'";
+
+$results = $dbLink->query($query);
+
+if (empty($search)) {
+	die("empty");
+}
+// Check if it was successful
+if($results) {
+    // Make sure there are some files in there
+    if($results->num_rows == 0) {
+        echo '<p>There are no files in the database</p>';
+    }
+    else {
+        // Print the top of a table
+        echo '<table width="80%" class="table table-hover">
+                <tr>
+                    <td><b>ID</b></td>
+                    <td><b>Contract Admin</b></td>
+                    <td><b>Customer Name</b></td>
+                    <td><b>Order Number</b></td>
+					<td><b>Created</b></td>
+                </tr>';
+ 
+        // Print each file
+        while($row = $results->fetch_assoc()) {
+            echo "
+                <tr>
+                    <td>{$row['id']}</td>
+                    <td>{$row['contractAdmin']}</td>
+                    <td>{$row['customerName']}</td>
+					<td>{$row['orderNumb']}</td>
+					<td>{$row['Created']}</td>
+                </tr>";
+        }
+ 
+        // Close table
+        echo '</table>';
+    }
+ 
+ 
+    // Free the result
+    $results->free();
+}
+else
+{
+    echo 'Error! SQL query failed:';
+    echo "<pre>{$dbLink->error}</pre>";
+}
+ 
+
+// Close the mysql connection
+$dbLink->close();
+ ?>
 </section>
-
-
 
 <article id="article">
 Article

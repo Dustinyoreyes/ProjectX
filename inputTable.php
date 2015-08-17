@@ -50,13 +50,9 @@ $sql = "INSERT INTO namelist (contractAdmin,customerName,orderNumb,created) VALU
 
 if ($conn->query($sql) === TRUE) { 
 echo " New record was created successfully";} else { echo "Error: ". $sql . "<br>" . $conn->error;
-
 }
 
 $conn->close();
-
-
-
 
 ?>
 

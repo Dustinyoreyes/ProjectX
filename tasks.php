@@ -10,47 +10,51 @@
    <script src="script.js"></script>
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+   <script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
    <title>CSS MenuMaker</title>
+	
 </head>
 
 <body id="body">
 <header id="header">
 <div>
-<h1 id="headtitle">Home Page</h1>
+<h1 id="headtitle">Tasks<h1>
 </div>
 
 <!-- HTML for SEARCH BAR -->
-	<div id="tfheader" style="color:black" class="panel panel-default">
-		<form id="tfnewsearch" method="get" action="https://www.google.com/">
-		        <input type="text" class="tftextinput" name="q" size="21" maxlength="130"><input type="submit" value="Search" class="tfbutton">
+	<div id="tfheader" style="color:black">
+		<form id="tfnewsearch" method="get" action="http://www.google.com">
+		        <input type="text" class="tftextinput" name="q" size="21" maxlength="120"><input type="submit" value="Search" class="tfbutton">
 		</form>
 	<div class="tfclear"></div>
 	</div>
-
 </header>
 
 <aside id="asidemenu">
 <div id='cssmenu'>
 <ul>
-   <li><a href='#' class="well"><span id="home" class="glyphicon glyphicon-home"></span> Home</a></li>
+   <li><a href="index.php"><span id="home" class="glyphicon glyphicon-home"></span> Home</a></li>
    <li class='active has-sub'><a href='#'><span id="fileupload" class="glyphicon glyphicon-file"></span> File Upload</a>
       <ul>
-         <li class='has-sub'><span><a href="FileUploadNavDatabase.php"> Upload to database</span></a>
-		 <!--
-            <ul>
-               <li><a href='#'><span>Sub Product</span></a></li>
-               <li class='last'><a href='#'><span>Sub Product</span></a></li>
-         	</ul>
-		  -->
-         </li>
-         <li class='has-sub'><span><a href="FileUploadNavLocal.php">Upload to local server</span></a>
-         <!-- 
+         <li class='has-sub'><span><a href="FileUploadNavDatabase.php">Upload to database</span></a>
+            <!--
 			<ul>
                <li><a href='#'><span>Sub Product</span></a></li>
                <li class='last'><a href='#'><span>Sub Product</span></a></li>
             </ul>
-		  -->	
+			-->
+			
+         </li>
+         <li class='has-sub'><span><a href="FileUploadNavLocal.php">Upload to local server</span></a>
+            
+			<!--
+			<ul>
+               <li><a href='#'><span>Sub Product</span></a></li>
+               <li class='last'><a href='#'><span>Sub Product</span></a></li>
+            </ul>
+			-->
+			
          </li>
       </ul>
    </li>
@@ -61,8 +65,7 @@
 </div>
 </aside>
 
-<section id="section">
-Testing Page
+<section id= "section">
 
 <div id="print">
 <span class="glyphicon glyphicon-print"></span>
@@ -74,42 +77,51 @@ function myFunction() {
 </script>
 </div>
 
-<div id="">
-    <form action="add_file.php" method="post" enctype="multipart/form-data">
-		<!--forecast DB/customer-->
-       <h3> Select file and upload to forecast DB:</h3>
-		<input type="file" name="uploaded_file" id="file"><br>
-        <input type="submit" value="Upload File" id="submit">
-    </form>
-  
-<!-- The data encoding type, enctype, MUST be specified as below -->
-<form enctype="multipart/form-data" action="upload.php" method="POST">
-    <!-- MAX_FILE_SIZE must precede the file input field -->
-    <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
-    <!-- Name of input element determines name in $_FILES array -->
-	<!-- local server EmailLink2/userfile-->
-	<h3>Send this file to local server :</h3>
-	<input name="userfile" type="file" id="file"/><br>
-    <input type="submit" id="submit" value="Send File"/>
-</form>
 <br>
-	<p>
-        <a href="list_files.php">See all files</a>
-    </p>
-</div>	
-	<br>
+<a data-toggle="tooltip" data-placement="right" title="Under Construction!">
+Under construction
+</a>
+<br><br>
+
+<div ng-app="myApp" ng-controller="costCtrl" id="calculator">
+
+Quantity: <input type="number" ng-model="quantity">
+Price: <input type="number" ng-model="price">
+<br><br>
+<p><b>Total = {{ (quantity * price) | currency }}</p>
+
+</div>
+
+<script>
+var app = angular.module('myApp', []);
+app.controller('costCtrl', function($scope) {
+    $scope.quantity = 1;
+    $scope.price = 9.99;
+});
+</script>
+
+
+
+<div>
+<ul class="pager">
+    <li><a href="#">Previous</a></li>
+    <li><a href="#">Next</a></li>
+  </ul>
+</div>  
 </section>
+
+
 
 <article id="article">
 Article
 </article>
-
-
 
 <footer id="footer">
 <?php
 include 'footer.php';
 ?>
 </footer>
+
+
 </body>
 </html>

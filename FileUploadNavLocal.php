@@ -24,7 +24,7 @@
 <!-- HTML for SEARCH BAR -->
 	<div id="tfheader" style="color:black">
 		<form id="tfnewsearch" method="get" action="http://www.google.com">
-		        <input type="text" class="tftextinput" name="q" size="21" maxlength="120"><input type="submit" value="search" class="tfbutton">
+		        <input type="text" class="tftextinput" name="q" size="21" maxlength="120"><input type="submit" value="Search" class="tfbutton">
 		</form>
 	<div class="tfclear"></div>
 	</div>
@@ -33,8 +33,8 @@
 <aside id="asidemenu">
 <div id='cssmenu'>
 <ul>
-   <li><a href="index.php"><span>Home</span></a></li>
-   <li class='active has-sub'><a href='#'><span>File Upload</span></a>
+   <li><a href="index.php"><span id="home" class="glyphicon glyphicon-home"></span> Home</a></li>
+   <li class='active has-sub'><a href='#'><span id="fileupload" class="glyphicon glyphicon-file"></span> File Upload</a>
       <ul>
          <li class='has-sub'><span><a href="FileUploadNavDatabase.php">Upload to database</span></a>
             <!--
@@ -57,9 +57,9 @@
          </li>
       </ul>
    </li>
-   <li><a href='dataInputForm.php'><span>Data Input Form</span></a></li>
-   <li><a href='about.php'><span>Tasks</span></a></li>
-   <li class='last'><a href="mailto:wongdustin529@gmail.com?Subject=Hello%20again" target="_top"><span>Contact Admin</span></a></li>
+   <li><a href='dataInputForm.php'><span id="forminput" class="glyphicon glyphicon-list-alt"></span> Form Input</a></li>
+   <li><a href='tasks.php'><span id="tasks" class="glyphicon glyphicon-tasks"></span> Tasks</a></li>
+   <li class='last'><a href="mailto:wongdustin529@gmail.com?Subject=Hello%20again" target="_top"><span id="contactadmin" class="glyphicon glyphicon-envelope"></span> Contact Admin</a></li>
 </ul>
 </div>
 </aside>
