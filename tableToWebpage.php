@@ -14,7 +14,7 @@
 </head>
 
 
-
+<div id="myDiv"></div>
 <?php
  
  // Connect to the database
@@ -48,8 +48,8 @@ if($result) {
         // Print each file
         while($row = $result->fetch_assoc()) {
             echo "
-                <tr>
-					<td><a><button><span class='glyphicon glyphicon-trash'></span></button></a></td>
+                <tr id='rowdelete'>
+					<td><a><button id='trashbin' onclick='loadXMLDoc()'><span class='glyphicon glyphicon-trash'></span></button></a></td>
                     <td>{$row['id']}</td>
                     <td>{$row['contractAdmin']}</td>
                     <td>{$row['customerName']}</td>
@@ -73,12 +73,33 @@ else
  
 // Close the mysql connection
 $dbLink->close();
-
-
-
- 
- 
  ?>
  
+<script>
+function loadXMLDoc()
+{
+var xmlhttp;
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+    }
+}
+xmlhttp.open("GET","delete2.php",true);
+xmlhttp.send();
+}
+</script> 
+
+
+
  
  </html>
