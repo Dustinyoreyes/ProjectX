@@ -94,7 +94,7 @@ xmlhttp.onreadystatechange=function()
     document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
     }
 }
-xmlhttp.open("GET","delete2.php",true);
+xmlhttp.open("GET","delete.php",true);
 xmlhttp.send();
 }
 </script> 
