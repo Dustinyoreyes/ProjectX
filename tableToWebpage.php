@@ -14,7 +14,8 @@
 </head>
 
 
-<div id="myDiv"></div>
+<p id="demo"></p>
+
 <?php
  
  // Connect to the database
@@ -22,18 +23,30 @@ $dbLink = new mysqli('127.0.0.1', 'root', '', 'forecast');
 if(mysqli_connect_errno()) {
     die("MySQL connection failed: ". mysqli_connect_error());
 }
- 
+
 // Query for a list of all existing files
 $sql = 'SELECT `id`, `contractAdmin`, `customerName`, `orderNumb`, `created` FROM `namelist`';
 $result = $dbLink->query($sql);
- 
+$php_variable = ISSET($_GET['deleterow']);
+$php_delete = "DELETE FROM namelist WHERE id='$php_variable'";
+$result2 = $dbLink->query($php_delete);
+		
+ if(isset($php_variable)) {
+	echo "$php_delete";
+} else {
+	echo "$php_variable is not set";
+}
+
+
 // Check if it was successful
 if($result) {
+	
     // Make sure there are some files in there
     if($result->num_rows == 0) {
         echo '<p>There are no files in the database</p>';
     }
     else {
+	
         // Print the top of a table
         echo '<table width="80%" class="table table-hover">
                 <tr>
@@ -48,16 +61,16 @@ if($result) {
         // Print each file
         while($row = $result->fetch_assoc()) {
             echo "
-                <tr id='rowdelete'>
-					<td><a><button id='trashbin' onclick='loadXMLDoc()'><span class='glyphicon glyphicon-trash'></span></button></a></td>
-                    <td>{$row['id']}</td>
-                    <td>{$row['contractAdmin']}</td>
-                    <td>{$row['customerName']}</td>
-					<td>{$row['orderNumb']}</td>
-					<td>{$row['created']}</td>
+                <tr>
+					<td class='deleterow' name='deleterow'><a><button onclick='alertDelete()' class='glyphicon glyphicon-remove'></button></a></td>
+                    <td class='deleterow' name='deleterow'>{$row['id']}</td>
+                    <td class='deleterow' name='deleterow'>{$row['contractAdmin']}</td>
+                    <td class='deleterow' name='deleterow'>{$row['customerName']}</td>
+					<td class='deleterow' name='deleterow'>{$row['orderNumb']}</td>
+					<td class='deleterow' name='deleterow'>{$row['created']}</td>
                 </tr>";
-        }
- 
+        } 
+
         // Close table
         echo '</table>';
     }
@@ -70,35 +83,49 @@ else
     echo 'Error! SQL query failed:';
     echo "<pre>{$dbLink->error}</pre>";
 }
+
  
 // Close the mysql connection
 $dbLink->close();
+
  ?>
  
+ 
 <script>
-function loadXMLDoc()
-{
-var xmlhttp;
-if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-  xmlhttp=new XMLHttpRequest();
-  }
-else
-  {// code for IE6, IE5
-  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-xmlhttp.onreadystatechange=function()
-  {
-  if (xmlhttp.readyState==4 && xmlhttp.status==200)
-    {
-    document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
-    }
-}
-xmlhttp.open("GET","delete.php",true);
-xmlhttp.send();
-}
-</script> 
+function alertDelete(){
+	var x; 
+	if (confirm("Are you sure you want to delete?")==true) 
+	{
+		x = $(".deleterow").on("click", function(){
+var $killrow = $(this).parent('tr');
+    $killrow.addClass("danger");
+$killrow.fadeOut(400, function(){
+    $(this).remove();
+});});;
+	} else {
+		x = "<?php echo ""; ?>";
+	}
+	document.getElementById("demo").innerHTML = x;	
+	}
+ 
+ </script>
+ 
 
+ 
+ 
+ 
+<!--
+<script>
+
+$(".deleterow").on("click", function(){
+var $killrow = $(this).parent('tr');
+    $killrow.addClass("danger");
+$killrow.fadeOut(400, function(){
+    $(this).remove();
+});});
+
+</script> 
+-->
 
 
  

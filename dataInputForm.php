@@ -91,34 +91,38 @@ Under construction
 <br><br>
 
 
-<form action="inputTable.php" method="post" enctype="multipart/form-data">
+
+<form action="inputTable.php" method="post" enctype="multipart/form-data"></form>
 <b>Today's Date:</b>
+
 <?php
 date_default_timezone_set('America/Los_Angeles');
 echo date("m/d/y");
 ?>
+
 <br>
 <br>
 <b>Contract Admin:</b> <input type="text" method="post" name="contractAdmin"></input>
+
 <br><br>
 <b>Customer Name:</b> <input type="text" method="post" name="customerName"></input>
+
 <br><br>
 <b>Order #:</b> <input type="text" method="post" name="orderNumb"></input>
+
 <br><br>
 <input type="submit" value="Submit" id="submit"> 
 </form>
 <br><br>
 
 <?php include "tableToWebpage.php"; ?>
- 
- 
+
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">  
   <input type="search" name="search"><input type="submit" value="Search Table">
 </form>  
-
-Search Results:
-<?php 
  
+Search Results:
+<?php  
 // Connect to the database
 $dbLink = new mysqli('127.0.0.1', 'root', '', 'forecast');
 if(mysqli_connect_errno()) {

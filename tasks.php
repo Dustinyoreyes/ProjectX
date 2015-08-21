@@ -100,12 +100,52 @@ app.controller('costCtrl', function($scope) {
 });
 </script>
 
+<hr>
+
+<div class="container">
+    <h4>Table Management</h4>
+    <div class="table-responsive">
+    <table border="1" class="table table-striped table-hover table-bordered">
+<tr>
+    <td>aaa</td>    <td>aaa</td>    <td>aaa</td>    <td>aaa</td>    <td>aaa</td><td class='deleterow'><div class='glyphicon glyphicon-remove'></div></td>
+    </tr><tr>
+    <td>aaa</td>    <td>aaa</td>    <td>aaa</td>    <td>aaa</td>    <td>aaa</td><td class='deleterow'><div class='glyphicon glyphicon-remove'></div></td>
+    </tr><tr>
+    <td>aaa</td>    <td>aaa</td>    <td>aaa</td>    <td>aaa</td>    <td>aaa</td><td class='deleterow'><div class='glyphicon glyphicon-remove'></div></td>
+    </tr><tr>
+    <td>aaa</td>    <td>aaa</td>    <td>aaa</td>    <td>aaa</td>    <td>aaa</td><td class='deleterow'><div class='glyphicon glyphicon-remove'></div></td>
+    </tr><tr>
+    <td>aaa</td>    <td>aaa</td>    <td>aaa</td>    <td>aaa</td>    <td>aaa</td> <td class='deleterow'><div class='glyphicon glyphicon-remove'></div></td>
+    </tr>
+    </table>
+</div></div>
+<div style="">
+ <button class='btn btn-lg btn-primary addnewrow pull-right'>Add New <span class="glyphicon glyphicon-plus"></span></button>
+</div>	
+<hr>	
+		
+<script>
+$(".deleterow").on("click", function(){
+var $killrow = $(this).parent('tr');
+    $killrow.addClass("danger");
+$killrow.fadeOut(400, function(){
+    $(this).remove();
+});});
+
+$(".addnewrow").on("click", function(){
+$('table tr:last').after("<tr><td data-qid='X'><span>NEW</span></td><td><span>NEW</span></td><td><span>NEW</span></td><td><span>NEW</span></td><td><span>NEW</span></td><td class='deleterow'><div class='glyphicon glyphicon-remove'></div></td></tr>");
+});
+</script>
+
+
+
+
 
 
 <div>
 <ul class="pager">
-    <li><a href="#">Previous</a></li>
-    <li><a href="#">Next</a></li>
+    <li><a href="#">Previous page</a></li>
+    <li><a href="#">Next page</a></li>
   </ul>
 </div>  
 </section>
