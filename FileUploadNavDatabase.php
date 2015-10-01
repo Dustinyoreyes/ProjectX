@@ -23,7 +23,7 @@
 
 <!-- HTML for SEARCH BAR -->
 	<div id="tfheader" style="color:black">
-		<form id="tfnewsearch" method="get" action="http://www.google.com">
+		<form id="tfnewsearch" method="get" action="http://www.google.com/" target="_blank">
 		        <input type="text" class="tftextinput" name="q" size="21" maxlength="120"><input type="submit" value="Search" class="tfbutton">
 		</form>
 	<div class="tfclear"></div>

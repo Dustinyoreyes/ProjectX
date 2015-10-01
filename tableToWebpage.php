@@ -13,84 +13,82 @@
    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </head>
 
-
 <p id="demo"></p>
 
-<?php
- 
- // Connect to the database
-$dbLink = new mysqli('127.0.0.1', 'root', '', 'forecast');
-if(mysqli_connect_errno()) {
-    die("MySQL connection failed: ". mysqli_connect_error());
-}
-
-// Query for a list of all existing files
-$sql = 'SELECT `id`, `contractAdmin`, `customerName`, `orderNumb`, `created` FROM `namelist`';
-$result = $dbLink->query($sql);
-$php_variable = ISSET($_GET['deleterow']);
-$php_delete = "DELETE FROM namelist WHERE id='$php_variable'";
-$result2 = $dbLink->query($php_delete);
-		
- if(isset($php_variable)) {
-	echo "$php_delete";
-} else {
-	echo "$php_variable is not set";
-}
-
-
-// Check if it was successful
-if($result) {
-	
-    // Make sure there are some files in there
-    if($result->num_rows == 0) {
-        echo '<p>There are no files in the database</p>';
+<script type="text/javascript">
+function deleteConfirm(){
+    var result = confirm("Are you sure to delete users?");
+    if(result){
+        return true;
+    }else{
+        return false;
     }
-    else {
-	
-        // Print the top of a table
-        echo '<table width="80%" class="table table-hover">
-                <tr>
+}
+
+$(document).ready(function(){
+    $('#select_all').on('click',function(){
+        if(this.checked){
+            $('.checkbox').each(function(){
+                this.checked = true;
+            });
+        }else{
+             $('.checkbox').each(function(){
+                this.checked = false;
+            });
+        }
+    });
+});
+</script>
+
+
+<?php
+include_once('dbConfig.php');
+$query = mysqli_query($dbLink,"SELECT * FROM namelist");
+?>
+
+
+      <form name="bulk_action_form" action="action.php" method="post" onsubmit="return deleteConfirm();"/>
+      <table width="80%" class="table table-hover">
+                <thead>
+				<tr>
 					<td><b>Action</b></td>
                     <td><b>ID</b></td>
                     <td><b>Contract Admin</b></td>
                     <td><b>Customer Name</b></td>
                     <td><b>Order Number</b></td>
 					<td><b>Created</b></td>
-                </tr>';
- 
-        // Print each file
-        while($row = $result->fetch_assoc()) {
-            echo "
+                </tr>
+				</thead>
+
+<?php 
+      // Print each file <button onclick='alertDelete()'  class='glyphicon glyphicon-remove'></button>
+	     if(mysqli_num_rows($query) > 0){
+         while($row = mysqli_fetch_assoc($query)){
+?>
                 <tr>
-					<td class='deleterow' name='deleterow'><a><button onclick='alertDelete()' class='glyphicon glyphicon-remove'></button></a></td>
-                    <td class='deleterow' name='deleterow'>{$row['id']}</td>
-                    <td class='deleterow' name='deleterow'>{$row['contractAdmin']}</td>
-                    <td class='deleterow' name='deleterow'>{$row['customerName']}</td>
-					<td class='deleterow' name='deleterow'>{$row['orderNumb']}</td>
-					<td class='deleterow' name='deleterow'>{$row['created']}</td>
-                </tr>";
-        } 
-
-        // Close table
-        echo '</table>';
-    }
- 
-    // Free the result
-    $result->free();
-}
-else
-{
-    echo 'Error! SQL query failed:';
-    echo "<pre>{$dbLink->error}</pre>";
-}
+					<td><input type='checkbox' name="checked_id[]" class="checkbox" value="<?php echo $row['id'];?>"/></td>
+                    <td><?php echo $row['id'];?></td>
+                    <td><?php echo $row['contractAdmin'];?></td>
+                    <td><?php echo $row['customerName'];?></td>
+					<td><?php echo $row['orderNumb'];?></td>
+					<td><?php echo $row['Created'];?></td>
+					</form>
+                </tr>
+			
+<?php } } else { ?>
+            <tr><td colspan="5">No records found.</td></tr> 
+        <?php } ?>
+		</table>
+			<input type="submit" class="btn btn-danger" name="bulk_delete_submit" value="Delete"/>
+</form>
 
  
-// Close the mysql connection
-$dbLink->close();
 
- ?>
- 
- 
+
+
+<br><br>
+
+
 <script>
 function alertDelete(){
 	var x; 
@@ -103,13 +101,13 @@ $killrow.fadeOut(400, function(){
     $(this).remove();
 });});;
 	} else {
-		x = "<?php echo ""; ?>";
+		x = "";
 	}
 	document.getElementById("demo").innerHTML = x;	
 	}
  
  </script>
- 
+
 
  
  

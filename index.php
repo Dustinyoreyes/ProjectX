@@ -22,8 +22,8 @@
 
 <!-- HTML for SEARCH BAR -->
 	<div id="tfheader" style="color:black" class="panel panel-default">
-		<form id="tfnewsearch" method="get" action="https://www.google.com/">
-		        <input type="text" class="tftextinput" name="q" size="21" maxlength="130"><input type="submit" value="Search" class="tfbutton">
+		<form id="tfnewsearch" method="get" action="http://www.google.com/" target="_blank">
+		        <input type="text" class="tftextinput" name="q" size="50" maxlength="130"><input type="submit" value="Search" class="tfbutton">
 		</form>
 	<div class="tfclear"></div>
 	</div>
@@ -61,9 +61,6 @@
 </div>
 </aside>
 
-<section id="section">
-Testing Page
-
 <div id="print">
 <span class="glyphicon glyphicon-print"></span>
 <button onclick="myFunction()" style="color:black">Print this page</button>
@@ -73,6 +70,93 @@ function myFunction() {
 }
 </script>
 </div>
+
+<style>
+  .carousel-inner > .item > img,
+  .carousel-inner > .item > a > img {
+      width: 500px;
+      margin: auto; 
+
+  }
+  #myCarousel{
+	  max-height: 500px;
+	  max-width: 70%;
+	  margin:25px 190px 35px;
+	  border: dotted;
+  }
+</style>
+
+<section id="section">
+
+<div class="container">
+<div id="myCarousel" class="carousel slide">
+<!-- Indicators -->
+<ol class="carousel-indicators">
+	  <li class="item1 active"></li>
+      <li class="item2"></li>
+</ol>
+<!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+      <div class="item active">
+        <img src="meggittlogo.jpg" alt="pic">
+        <div class="carousel-caption">
+          <h4>Home</h4>
+          <p></p>
+        </div>
+      </div>
+  
+<div class="item">
+        <img src="Capture.png" alt="pic">
+        <div class="carousel-caption">
+          <h4>Global team</h4>
+          <p></p>
+        </div>
+      </div>
+ 
+<!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" role="button">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only" aria-hidden="true">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only" aria-hidden="true">Next</span>
+    </a>
+  </div>
+
+
+<script>
+$(document).ready(function(){
+    // Activate Carousel
+    $("#myCarousel").carousel({interval:8000});
+    
+    // Enable Carousel Indicators
+    $(".item1").click(function(){
+        $("#myCarousel").carousel(0);
+    });
+    $(".item2").click(function(){
+        $("#myCarousel").carousel(1);
+    });
+    $(".item3").click(function(){
+        $("#myCarousel").carousel(2);
+    });
+    $(".item4").click(function(){
+        $("#myCarousel").carousel(3);
+    });
+    
+    // Enable Carousel Controls
+    $(".left").click(function(){
+        $("#myCarousel").carousel("prev");
+    });
+    $(".right").click(function(){
+        $("#myCarousel").carousel("next");
+    });
+});
+</script>
+</div>
+
+Testing Page
+
 
 <div id="">
     <form action="add_file.php" method="post" enctype="multipart/form-data">
@@ -98,7 +182,6 @@ function myFunction() {
     </p>
 </div>	
 	<br>
-</section>
 
 <article id="article">
 Article

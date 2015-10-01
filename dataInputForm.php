@@ -35,7 +35,7 @@ th,td {
 
 <!-- HTML for SEARCH BAR -->
 	<div id="tfheader" style="color:black" class="panel panel-default">
-		<form id="tfnewsearch" method="get" action="https://www.google.com/">
+		<form id="tfnewsearch" method="get" action="http://www.google.com/" target="_blank">
 		        <input type="text" class="tftextinput" name="q" size="21" maxlength="120"><input type="submit" value="Search" class="tfbutton">
 		</form>
 	<div class="tfclear"></div>
@@ -92,7 +92,7 @@ Under construction
 
 
 
-<form action="inputTable.php" method="post" enctype="multipart/form-data"></form>
+<form action="inputTable.php" method="post" enctype="multipart/form-data">
 <b>Today's Date:</b>
 
 <?php
@@ -103,22 +103,19 @@ echo date("m/d/y");
 <br>
 <br>
 <b>Contract Admin:</b> <input type="text" method="post" name="contractAdmin"></input>
-
 <br><br>
 <b>Customer Name:</b> <input type="text" method="post" name="customerName"></input>
-
 <br><br>
 <b>Order #:</b> <input type="text" method="post" name="orderNumb"></input>
-
 <br><br>
 <input type="submit" value="Submit" id="submit"> 
 </form>
 <br><br>
 
-<?php include "tableToWebpage.php"; ?>
+<?php include "tableToWebpage.php";?>
 
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">  
-  <input type="search" name="search"><input type="submit" value="Search Table">
+  <input type="search" name="search" alt="Please click Search Table"><input type="submit" value="Search Table">
 </form>  
  
 Search Results:
@@ -172,37 +169,31 @@ if($results) {
                     <td><b>Order Number</b></td>
 					<td><b>Created</b></td>
                 </tr>';
+	}
+}
  
-        // Print each file
-        while($row = $results->fetch_assoc()) {
-            echo "
+         while($row = $results->fetch_assoc()) {
+?>
                 <tr>
-                    <td>{$row['id']}</td>
-                    <td>{$row['contractAdmin']}</td>
-                    <td>{$row['customerName']}</td>
-					<td>{$row['orderNumb']}</td>
-					<td>{$row['Created']}</td>
-                </tr>";
-        }
- 
-        // Close table
-        echo '</table>';
-    }
- 
- 
-    // Free the result
-    $results->free();
+					<form action="Delete.php" method="post">
+					<td><input type='checkbox' name="checkbox[]" id="checkbox[]" value="<?php echo $row['id'];?>"/><input type="hidden" name="delete" value="yes"/><input type="submit" name="delete"/></td>
+                    <td><?php echo $row['id'];?></td>
+                    <td><?php echo $row['contractAdmin'];?></td>
+                    <td><?php echo $row['customerName'];?></td>
+					<td><?php echo $row['orderNumb'];?></td>
+					<td><?php echo $row['created'];?></td>
+					</form>
+                </tr>
+			
+<?php
 }
-else
-{
-    echo 'Error! SQL query failed:';
-    echo "<pre>{$dbLink->error}</pre>";
-}
- 
+?>
 
-// Close the mysql connection
-$dbLink->close();
- ?>
+
+
+
+
+
 </section>
 
 <article id="article">

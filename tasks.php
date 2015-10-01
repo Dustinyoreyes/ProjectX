@@ -24,7 +24,7 @@
 
 <!-- HTML for SEARCH BAR -->
 	<div id="tfheader" style="color:black">
-		<form id="tfnewsearch" method="get" action="http://www.google.com">
+		<form id="tfnewsearch" method="get" action="http://www.google.com/" target="_blank">
 		        <input type="text" class="tftextinput" name="q" size="21" maxlength="120"><input type="submit" value="Search" class="tfbutton">
 		</form>
 	<div class="tfclear"></div>
@@ -77,6 +77,7 @@ function myFunction() {
 </script>
 </div>
 
+
 <br>
 <a data-toggle="tooltip" data-placement="right" title="Under Construction!">
 Under construction
@@ -107,7 +108,7 @@ app.controller('costCtrl', function($scope) {
     <div class="table-responsive">
     <table border="1" class="table table-striped table-hover table-bordered">
 <tr>
-    <td>aaa</td>    <td>aaa</td>    <td>aaa</td>    <td>aaa</td>    <td>aaa</td><td class='deleterow'><div class='glyphicon glyphicon-remove'></div></td>
+    <td><?php ?></td>    <td>aaa</td>    <td>aaa</td>    <td>aaa</td>    <td>aaa</td><td class='deleterow'><div class='glyphicon glyphicon-remove'></div></td>
     </tr><tr>
     <td>aaa</td>    <td>aaa</td>    <td>aaa</td>    <td>aaa</td>    <td>aaa</td><td class='deleterow'><div class='glyphicon glyphicon-remove'></div></td>
     </tr><tr>
@@ -137,15 +138,28 @@ $('table tr:last').after("<tr><td data-qid='X'><span>NEW</span></td><td><span>NE
 });
 </script>
 
+<img src="testing.gif" alt="pic" height="50%" width="50%">
+<br><br>
 
 
 
 
 
+
+<form action="checkbox.php" method="post">  
+<input type="checkbox" name="checked">
+<input type="submit" name="checkboxsubmit">
+</form>
+
+
+
+
+
+<br>
 <div>
 <ul class="pager">
-    <li><a href="#">Previous page</a></li>
-    <li><a href="#">Next page</a></li>
+    <li class="previous"><a href="#">Previous page</a></li>
+    <li class="next"><a href="#">Next page</a></li>
   </ul>
 </div>  
 </section>
