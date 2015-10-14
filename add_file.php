@@ -14,11 +14,24 @@
     };
 </script>
 
+
+
 <?php
 
 //CREATE A CONNECTION using Procedural Style
 $conn = mysqli_connect('localhost', 'root', '','forecast');
+$name = mysqli_real_escape_string($conn, $_FILES['uploaded_file']['name']);
+$mime = mysqli_real_escape_string($conn, $_FILES['uploaded_file']['type']);
+$data = mysqli_real_escape_string($conn, file_get_contents($_FILES ['uploaded_file']['tmp_name']));
+$size = Intval($_FILES['uploaded_file']['size']);
 
+
+
+//CHECK if empty
+if(empty($data)){
+			echo "Please choose a file";
+			die;
+		 }	
 //CHECK CONNECTION 
 if (!$conn) {
 	die('Connection failed: ('.mysqli_connect_errno().')'. mysqli_connect_errno());
@@ -45,13 +58,11 @@ if ($conn->query($sql) === TRUE) {
 
 // Check if a file has been uploaded
 if(isset($_FILES['uploaded_file'])) {
-echo "File is set for uploading"; }
+echo "File is set for uploading"; 
+}
 echo "<br>";
 // Gather all required data
-        $name = mysqli_real_escape_string($conn, $_FILES['uploaded_file']['name']);
-        $mime = mysqli_real_escape_string($conn, $_FILES['uploaded_file']['type']);
-        $data = mysqli_real_escape_string($conn, file_get_contents($_FILES ['uploaded_file']['tmp_name']));
-        $size = Intval($_FILES['uploaded_file']['size']);
+       
  
         // Create the SQL query
         $query = "

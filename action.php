@@ -7,6 +7,6 @@
             mysqli_query($dbLink,"DELETE FROM namelist WHERE id=".$id);
         }
         $_SESSION['success_msg'] = 'Users have been deleted successfully.';
-        header("Location:index.php");
+        header("Location:dataInputForm.php");
     }
 ?>

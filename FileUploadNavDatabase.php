@@ -56,8 +56,10 @@
 		 </li>
       </ul>
    </li>
-   <li><a href='dataInputForm.php'><span id="forminput" class="glyphicon glyphicon-list-alt"></span>Form Input</a></li>
+    <li><a href='special.php'><span id="forminput" class="glyphicon glyphicon-list-alt"></span> Form Input</a></li>
    <li><a href='tasks.php'><span id="tasks" class="glyphicon glyphicon-tasks"></span> Tasks</a></li>
+   <li><a href='downloads.php'><span id="downloads" class="glyphicon glyphicon-fire"></span> Downloads</a></li>
+   <li><a href='worksheet.php'><span id="Worksheet" class="glyphicon glyphicon-fire"></span> Worksheet</a></li>
    <li class='last'><a href="mailto:wongdustin529@gmail.com?Subject=Hello%20again" target="_top"><span id="contactadmin" class="glyphicon glyphicon-envelope"></span> Contact Admin</a></li>
 </ul>
 </div>
@@ -68,15 +70,11 @@
 <div id="print">
 <span class="glyphicon glyphicon-print"></span>
 <button onclick="myFunction()" style="color:black">Print this page</button>
-<script>
-function myFunction() {
-    window.print();
-}
+<script src="printIcon.js">
 </script>
 </div>
 
-
-<div>
+<div id="">
     <form action="add_file.php" method="post" enctype="multipart/form-data">
 		<!--forecast DB/customer-->
        <h3> Select file and upload to forecast DB:</h3>
@@ -89,6 +87,8 @@ function myFunction() {
 </p>
 </div>
 </section>
+
+
 
 <article id="article">
 Article

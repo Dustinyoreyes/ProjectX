@@ -1,5 +1,6 @@
 #body {
 background-color: #262931;
+height:100%;
 }
 
 
@@ -112,6 +113,7 @@ border-style:solid;
 #footer {
 border-style:solid;
 padding-left:10px;
+
 }
 
 #submit {
@@ -335,8 +337,9 @@ padding-right:10px;
 }
 
 #fileupload {
+
+font-size-adjust:auto;
 padding-right:10px;
-padding-bottom:4px;
 }
 
 #forminput {
@@ -345,6 +348,16 @@ padding-right:10px;
 }
 
 #tasks {
+font-size-adjust:auto;
+padding-right:10px;
+}
+
+#downloads {
+font-size-adjust:auto;
+padding-right:10px;
+}
+
+#Worksheet {
 font-size-adjust:auto;
 padding-right:10px;
 }

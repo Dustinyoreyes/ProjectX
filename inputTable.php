@@ -14,7 +14,7 @@
 </head>
 <body>
 <p>
-      <button onclick="location.href = 'http://localhost/projectx/index.php#';" id="myButton">Return home</button>
+      <button class="btn btn-primary" onclick="location.href = 'http://localhost/projectx/index.php#';" id="myButton">Return home</button>
 </p>
 
 <script type="text/javascript">
@@ -49,21 +49,21 @@ function test_input($data) {
 $sql = "INSERT INTO namelist (contractAdmin,customerName,orderNumb,created) VALUES ('$contractAdmin','$customerName','$orderNumb',NOW())";
 
 if ($conn->query($sql) === TRUE) { 
-echo " New record was created successfully";} else { echo "Error: ". $sql . "<br>" . $conn->error;
+echo " New record was created successfully" ."<br>";} else { echo "Error: ". $sql . "<br>" . $conn->error;
 }
 
 $conn->close();
 
 ?>
 
-
+<br>
  <p>
-      <button onclick="location.href = 'http://localhost/projectx/dataInputForm.php';" id="myButton">Return to Data Input Form</button>
+      <button class="btn btn-primary" onclick="location.href = 'http://localhost/projectx/special.php';" id="myButton">Return to Data Input Form</button>
 </p>
-
+<br>
 <script type="text/javascript">
     document.getElementById("myButton").onclick = function () {
-        location.href = "http://localhost/projectx/dataInputForm.php";
+        location.href = "http://localhost/projectx/special.php";
     };
 </script>
 	

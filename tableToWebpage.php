@@ -15,29 +15,8 @@
 
 <p id="demo"></p>
 
-<script type="text/javascript">
-function deleteConfirm(){
-    var result = confirm("Are you sure to delete users?");
-    if(result){
-        return true;
-    }else{
-        return false;
-    }
-}
 
-$(document).ready(function(){
-    $('#select_all').on('click',function(){
-        if(this.checked){
-            $('.checkbox').each(function(){
-                this.checked = true;
-            });
-        }else{
-             $('.checkbox').each(function(){
-                this.checked = false;
-            });
-        }
-    });
-});
+<script src="deleteConfirmation.js" >
 </script>
 
 
@@ -89,41 +68,6 @@ $query = mysqli_query($dbLink,"SELECT * FROM namelist");
 <br><br>
 
 
-<script>
-function alertDelete(){
-	var x; 
-	if (confirm("Are you sure you want to delete?")==true) 
-	{
-		x = $(".deleterow").on("click", function(){
-var $killrow = $(this).parent('tr');
-    $killrow.addClass("danger");
-$killrow.fadeOut(400, function(){
-    $(this).remove();
-});});;
-	} else {
-		x = "";
-	}
-	document.getElementById("demo").innerHTML = x;	
-	}
- 
- </script>
-
-
- 
- 
- 
-<!--
-<script>
-
-$(".deleterow").on("click", function(){
-var $killrow = $(this).parent('tr');
-    $killrow.addClass("danger");
-$killrow.fadeOut(400, function(){
-    $(this).remove();
-});});
-
-</script> 
--->
 
 
  

@@ -13,7 +13,7 @@
 // of $_FILES. 
 //Create a folder named Userfile in the Study folder and you can the upload all files to go in here. 
 
-$uploaddir = '/wamp/www/emaillink2/userfile/';
+$uploaddir = '/wamp/www/ProjectX/userfile/';
 $uploadfile = $uploaddir . basename($_FILES['userfile']['name']);
 
 
@@ -27,12 +27,12 @@ if (move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile)) {
 ?>
 
 <p>
-      <button onclick="location.href = 'http://localhost/EmailLink/index.php';" id="myButton">Return home</button>
+      <button onclick="location.href = 'http://localhost/ProjectX/index.php';" id="myButton">Return home</button>
 </p>
 
 <script type="text/javascript">
-    document.getElementById("myButton").onclick = function () {
-        location.href = "http://localhost/EmailLink2/index.php";
+    document.getElementById("myButton").onclick = function()) {
+        location.href = "http://localhost/ProjectX/index.php";
     };
 </script>
 	

@@ -10,14 +10,28 @@
    <script src="script.js"></script>
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+   <script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
    <title>CSS MenuMaker</title>
 </head>
 
+
+<style>
+table, th,td {
+		border: 1px solid black;
+		border-collapse: collapse;
+}
+th,td {
+	padding: 5px;
+}
+</style>
+
+
+
 <body id="body">
 <header id="header">
 <div>
-<h1 id="headtitle">Home Page</h1>
+<h1 id="headtitle">Special Form Input<h1>
 </div>
 
 <!-- HTML for SEARCH BAR -->
@@ -27,7 +41,7 @@
 		</form>
 	<div class="tfclear"></div>
 	</div>
-
+	
 </header>
 
 <aside id="asidemenu">
@@ -66,109 +80,100 @@
 </div>
 </aside>
 
+
+
+
+
 <div id="print">
 <span class="glyphicon glyphicon-print"></span>
 <button onclick="myFunction()" style="color:black" class="btn btn-default">Print this page</button>
 <script src="printIcon.js">
 </script>
 </div>
+<section id= "section">
 
-<style>
-  .carousel-inner > .item > img,
-  .carousel-inner > .item > a > img {
-      width: 500px;
-      margin: auto; 
+<form action="inputTable.php" method="post" enctype="multipart/form-data">
+<b>Today's Date:</b>
 
-  }
-  #myCarousel{
-	  max-height: 500px;
-	  max-width: 70%;
-	  margin:25px 190px 35px;
-	  border: dotted;
-  }
-</style>
-
-<section id="section">
-
-<div class="container">
-<div id="myCarousel" class="carousel slide">
-<!-- Indicators -->
-<ol class="carousel-indicators">
-	  <li class="item1 active"></li>
-      <li class="item2"></li>
-</ol>
-<!-- Wrapper for slides -->
-    <div class="carousel-inner" role="listbox">
-      <div class="item active">
-        <img src="meggittlogo.jpg" alt="pic">
-        <div class="carousel-caption">
-          <h4>Home</h4>
-          <p></p>
-        </div>
-      </div>
-  
-<div class="item">
-        <img src="Capture.png" alt="pic">
-        <div class="carousel-caption">
-          <h4>Global team</h4>
-          <p></p>
-        </div>
-      </div>
- 
-<!-- Left and right controls -->
-    <a class="left carousel-control" href="#myCarousel" role="button">
-      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-      <span class="sr-only" aria-hidden="true">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#myCarousel" role="button">
-      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-      <span class="sr-only" aria-hidden="true">Next</span>
-    </a>
-  </div>
-
-
-<script src="homeCarousel.js">
-</script>
-</div>
-
-Testing Page
-
-
-<div id="">
-    <form action="add_file.php" method="post" enctype="multipart/form-data">
-		<!--forecast DB/customer-->
-       <h3> Select file and upload to forecast DB:</h3>
-		<input type="file" name="uploaded_file" id="file"><br>
-        <input type="submit" value="Upload File" id="submit">
-    </form>
-  
-<!-- The data encoding type, enctype, MUST be specified as below -->
-<form enctype="multipart/form-data" action="upload.php" method="POST">
-    <!-- MAX_FILE_SIZE must precede the file input field -->
-    <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
-    <!-- Name of input element determines name in $_FILES array -->
-	<!-- local server EmailLink2/userfile-->
-	<h3>Send this file to local server :</h3>
-	<input name="userfile" type="file" id="file"/><br>
-    <input type="submit" id="submit" value="Send File"/>
-</form>
-<br>
-	<p>
-        <a href="list_files.php">See all files</a>
-    </p>
-</div>	
-	<br>
-
-<article id="article">
-Article
-</article>
-
-
-
-<footer id="footer">
 <?php
-include 'footer.php';
+date_default_timezone_set('America/Los_Angeles');
+echo date("m/d/y");
 ?>
-</footer>
+
+<br>
+<br>
+<b>Contract Admin:</b> <input type="text" method="post" name="contractAdmin"></input>
+<br><br>
+<b>Customer Name:</b> <input type="text" method="post" name="customerName"></input>
+<br><br>
+<b>Order #:</b> <input type="text" method="post" name="orderNumb"></input>
+<br><br>
+<input type="submit" value="Submit" id="submit"> 
+</form>
+<br><br>
+
+<script src="deleteConfirmation.js">
+</script>
+
+
+<?php
+include_once('dbConfig.php');
+$query = mysqli_query($dbLink,"SELECT * FROM namelist");
+?>
+
+
+      <form name="bulk_action_form" action="action.php" method="post" onsubmit="return deleteConfirm();"/>
+      <table width="80%" class="table table-hover">
+                <thead>
+				<tr>
+					<td><b>Action</b></td>
+                    <td><b>ID</b></td>
+                    <td><b>Contract Admin</b></td>
+                    <td><b>Customer Name</b></td>
+                    <td><b>Order Number</b></td>
+					<td><b>Created</b></td>
+                </tr>
+				</thead>
+
+<?php 
+      // Print each file <button onclick='alertDelete()'  class='glyphicon glyphicon-remove'></button>
+	     if(mysqli_num_rows($query) > 0){
+         while($row = mysqli_fetch_assoc($query)){
+?>
+                <tr>
+					<td><input type='checkbox' name="checked_id[]" class="checkbox" value="<?php echo $row['id'];?>"/></td>
+                    <td><?php echo $row['id'];?></td>
+                    <td><?php echo $row['contractAdmin'];?></td>
+                    <td><?php echo $row['customerName'];?></td>
+					<td><?php echo $row['orderNumb'];?></td>
+					<td><?php echo $row['Created'];?></td>
+					</form>
+                </tr>
+			
+<?php } } else { ?>
+            <tr><td colspan="5">No records found.</td></tr> 
+        <?php } ?>
+		</table>
+			<input type="submit" class="btn btn-danger" name="bulk_delete_submit" value="Delete"/>
+</form>
+
+ 
+
+
+
+<br><br>
+
+
+<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">  
+  <input type="search" name="search" alt="Please click Search Table"><input type="submit" value="Search Table">
+</form>  
+
+<?php include "search.php";?>
+
+
+</section>
+
+
+
 </body>
 </html>

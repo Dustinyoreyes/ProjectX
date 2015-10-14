@@ -1,0 +1,38 @@
+
+
+
+
+
+
+
+//Filter for the following
+SELECT * FROM `planner_messages` 
+WHERE days not between -7 AND 7 
+AND SupplyType='Discrete job' 
+AND xSignal <>'KB'
+AND xSignal <>'KB-PRESS'
+AND xSignal <>'DCI'
+AND xSignal <>'VM'
+AND Planner like 'Acosta'
+
+
+//Add up a column
+SELECT SUM(ExtCost) AS ExtendedCost FROM `planner_messages`
+
+//Update and remove comma 
+update planner_messages set extcost = REPLACE(extcost,',','')
+
+
+
+//Complete filter for each planner
+SELECT SUM(ExtCost) AS ExtendedCost FROM `planner_messages`
+WHERE days not between -7 AND 7 
+AND SupplyType='Discrete job' 
+AND xSignal <>'KB'
+AND xSignal <>'KB-PRESS'
+AND xSignal <>'DCI'
+AND xSignal <>'VM'
+AND Planner like 'Acosta'
+
+//Practice
+

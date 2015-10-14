@@ -27,7 +27,6 @@ th,td {
 </style>
 
 
-
 <body id="body">
 <header id="header">
 <div>
@@ -37,7 +36,7 @@ th,td {
 <!-- HTML for SEARCH BAR -->
 	<div id="tfheader" style="color:black" class="panel panel-default">
 		<form id="tfnewsearch" method="get" action="http://www.google.com/" target="_blank">
-		        <input type="text" class="tftextinput" name="q" size="50" maxlength="130"><input type="submit" value="Search" class="tfbutton">
+		        <input type="text" class="tftextinput" name="q" size="21" maxlength="120"><input type="submit" value="Search" class="tfbutton">
 		</form>
 	<div class="tfclear"></div>
 	</div>
@@ -70,10 +69,8 @@ th,td {
          </li>
       </ul>
    </li>
-   <li><a href='special.php'><span id="forminput" class="glyphicon glyphicon-list-alt"></span> Form Input</a></li>
+   <li><a href='dataInputForm.php'><span id="forminput" class="glyphicon glyphicon-list-alt"></span> Form Input</a></li>
    <li><a href='tasks.php'><span id="tasks" class="glyphicon glyphicon-tasks"></span> Tasks</a></li>
-   <li><a href='downloads.php'><span id="downloads" class="glyphicon glyphicon-fire"></span> Downloads</a></li>
-   <li><a href='worksheet.php'><span id="Worksheet" class="glyphicon glyphicon-fire"></span> Worksheet</a></li>
    <li class='last'><a href="mailto:wongdustin529@gmail.com?Subject=Hello%20again" target="_top"><span id="contactadmin" class="glyphicon glyphicon-envelope"></span> Contact Admin</a></li>
 </ul>
 </div>
@@ -83,12 +80,15 @@ th,td {
 
 <div id="print">
 <span class="glyphicon glyphicon-print"></span>
-<button onclick="myFunction()" style="color:black" class="btn btn-default">Print this page</button>
-<script src="printIcon.js">
+<button onclick="myFunction()" style="color:black">Print this page</button>
+<script>
+function myFunction() {
+    window.print();
+}
 </script>
 </div>
-
-<br>
+Under construction
+<br><br>
 
 
 
@@ -102,7 +102,7 @@ echo date("m/d/y");
 
 <br>
 <br>
-<b>Contract Admin:</b> <input type="text" method="post" name="contractAdmin" placeholder="Please enter name"></input>
+<b>Contract Admin:</b> <input type="text" method="post" name="contractAdmin"></input>
 <br><br>
 <b>Customer Name:</b> <input type="text" method="post" name="customerName"></input>
 <br><br>
@@ -114,9 +114,103 @@ echo date("m/d/y");
 
 <?php include "tableToWebpage.php";?>
 
+<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">  
+  <input type="search" name="search" alt="Please click Search Table"><input type="submit" value="Search Table">
+</form>  
+ 
+Search Results:
+<?php  
+// Connect to the database
+$dbLink = new mysqli('127.0.0.1', 'root', '', 'forecast');
+if(mysqli_connect_errno()) {
+    die("MySQL connection failed: ". mysqli_connect_error());
+} 
 
+$search = "";
 
+if($_SERVER["REQUEST_METHOD"] == "POST") {
+$search = mysqli_real_escape_string($dbLink,$_POST["search"]);	
+$search = test_input ($_POST["search"]);
+}
+function test_input($data) {
+	$data = trim($data);
+	$data = stripslashes($data);
+	$data = htmlspecialchars($data);
+	return $data;
+}
+
+echo $search;
+
+$query = "SELECT * FROM namelist WHERE 
+id LIKE '%{$search}%' OR
+contractAdmin LIKE '%{$search}%' OR
+customerName LIKE '%{$search}%' OR
+orderNumb LIKE '%{$search}%' OR 
+created LIKE '%{$search}%'";
+
+$results = $dbLink->query($query);
+
+if (empty($search)) {
+	die("empty");
+}
+// Check if it was successful
+if($results) {
+    // Make sure there are some files in there
+    if($results->num_rows == 0) {
+        echo '<p>There are no files in the database</p>';
+    }
+    else {
+        // Print the top of a table
+        echo '<table width="80%" class="table table-hover">
+                <tr>
+                    <td><b>ID</b></td>
+                    <td><b>Contract Admin</b></td>
+                    <td><b>Customer Name</b></td>
+                    <td><b>Order Number</b></td>
+					<td><b>Created</b></td>
+                </tr>';
+ 
+        // Print each file
+        while($row = $results->fetch_assoc()) {
+            echo "
+                <tr>
+                    <td>{$row['id']}</td>
+                    <td>{$row['contractAdmin']}</td>
+                    <td>{$row['customerName']}</td>
+					<td>{$row['orderNumb']}</td>
+					<td>{$row['Created']}</td>
+                </tr>";
+        }
+ 
+        // Close table
+        echo '</table>';
+    }
+ 
+ 
+    // Free the result
+    $results->free();
+}
+else
+{
+    echo 'Error! SQL query failed:';
+    echo "<pre>{$dbLink->error}</pre>";
+}
+ 
+
+// Close the mysql connection
+$dbLink->close();
+ ?>
 </section>
+
+<article id="article">
+Article
+</article>
+
+<footer id="footer">
+<?php
+include 'footer.php';
+?>
+</footer>
 
 
 </body>

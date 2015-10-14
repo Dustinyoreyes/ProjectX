@@ -12,8 +12,8 @@
    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
    <script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+   <script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
    <title>CSS MenuMaker</title>
-	
 </head>
 
 <body id="body">
@@ -23,12 +23,13 @@
 </div>
 
 <!-- HTML for SEARCH BAR -->
-	<div id="tfheader" style="color:black">
+	<div id="tfheader" style="color:black" class="panel panel-default">
 		<form id="tfnewsearch" method="get" action="http://www.google.com/" target="_blank">
-		        <input type="text" class="tftextinput" name="q" size="21" maxlength="120"><input type="submit" value="Search" class="tfbutton">
+		        <input type="text" class="tftextinput" name="q" size="50" maxlength="130"><input type="submit" value="Search" class="tfbutton">
 		</form>
 	<div class="tfclear"></div>
 	</div>
+	
 </header>
 
 <aside id="asidemenu">
@@ -58,27 +59,44 @@
          </li>
       </ul>
    </li>
-   <li><a href='dataInputForm.php'><span id="forminput" class="glyphicon glyphicon-list-alt"></span> Form Input</a></li>
+    <li><a href='special.php'><span id="forminput" class="glyphicon glyphicon-list-alt"></span> Form Input</a></li>
    <li><a href='tasks.php'><span id="tasks" class="glyphicon glyphicon-tasks"></span> Tasks</a></li>
+   <li><a href='downloads.php'><span id="downloads" class="glyphicon glyphicon-fire"></span> Downloads</a></li>
+   <li><a href='worksheet.php'><span id="Worksheet" class="glyphicon glyphicon-fire"></span> Worksheet</a></li>
    <li class='last'><a href="mailto:wongdustin529@gmail.com?Subject=Hello%20again" target="_top"><span id="contactadmin" class="glyphicon glyphicon-envelope"></span> Contact Admin</a></li>
 </ul>
 </div>
 </aside>
 
-<section id= "section">
 
 <div id="print">
 <span class="glyphicon glyphicon-print"></span>
-<button onclick="myFunction()" style="color:black">Print this page</button>
-<script>
-function myFunction() {
-    window.print();
-}
+<button onclick="myFunction()" style="color:black" class="btn btn-default">Print this page</button>
+<script src="printIcon.js">
 </script>
 </div>
+<section id= "section">
 
 
-<br>
+<br><br>
+<div>
+<p id="demo">Toggle file data</p>
+<input type="button" id="display" value="Click">
+<script src="FileLoadedToggle.js">
+</script>
+</input>
+</div>
+
+<br><br>
+<div>
+<p id="demo2">Alert Box</p>
+<input type="button" id="onClickalert" value="Click">
+<script src="alertBox.js">
+</script>
+</input>
+</div>
+
+<br><br>
 <a data-toggle="tooltip" data-placement="right" title="Under Construction!">
 Under construction
 </a>
@@ -93,15 +111,18 @@ Price: <input type="number" ng-model="price">
 
 </div>
 
-<script>
-var app = angular.module('myApp', []);
-app.controller('costCtrl', function($scope) {
-    $scope.quantity = 1;
-    $scope.price = 9.99;
-});
+<script src="multiplicationCalculator.js">
 </script>
 
 <hr>
+
+<br><br>
+<div ng-app="">
+<p>Input: <input type="text" ng-model="name" placeholder="Please enter name"></p>
+<h2> Instant output: {{name}} </h2>
+</div>
+<br><br>
+
 
 <div class="container">
     <h4>Table Management</h4>
@@ -125,6 +146,8 @@ app.controller('costCtrl', function($scope) {
 </div>	
 <hr>	
 		
+
+<!--		
 <script>
 $(".deleterow").on("click", function(){
 var $killrow = $(this).parent('tr');
@@ -138,18 +161,84 @@ $('table tr:last').after("<tr><td data-qid='X'><span>NEW</span></td><td><span>NE
 });
 </script>
 
+-->
+
+
+<form name="upload-form" id="upload-form" action="upload-information.php" enctype="multipart/form-data" method="post">
+
+    <input type="file" name="dealers_csv" id="dealers_csv" required="required" data-message="Please attach the mcust.csv file.">
+
+    <button type=\"submit\" name=\"Submit\" id=\"Submit\" class=\"csbutton-color upload-button\" style=\"margin-right:10px;\" >Submit files</button>
+
+</form>
+
+
+<script>
+$(document).ready(function() {
+    $("input#dealers_csv").on("change", function() {
+        var dealers = $("input#dealers_csv");
+        var arrfilepath = dealers.val().split("\\");
+        var filename = arrfilepath[arrfilepath.length - 1];
+        alert(filename);
+        if (filename === 0) {
+            alert("no file");
+            dealers.val('');
+        }
+    });
+});
+
+</script>
+
+
+<br><br>
+
+<form name="yourForm" method="post" enctype="multipart/form-data"">
+    <input type="file" name="fileField" />
+    <input type="button" value="submit" onClick="checkFile(this.form)" />
+</form>
+
+<script>
+function checkFile(yourForm){
+
+    var fileVal = yourForm.elements['fileField'].value;
+
+    //RegEx for valid file name and extensions.
+    //var pathExpression = "[?:[a-zA-Z0-9-_\.]+(?:.png|.jpeg|.gif)";
+
+
+    if(fileVal != ""){
+        if(!fileVal.toString().match(pathExpression) && confirm("The file is not a valid image. Do you want to continue?")){
+            yourForm.submit();
+        } else {
+            return;
+        }
+    } else {
+        if(confirm("Do you want to continue without adding image?")) {
+            yourForm.submit();
+        } else {
+            return;
+        }
+    }
+}
+</script>
+
+<!--toggle(1000) refers to the speed of toggle-->
+<br><br>
+<button id="gifVid">Toggle GIF</button>
+<script>
+$(document).ready(function(){
+    $("#gifVid").click(function(){
+        $("img").toggle(1000);
+    });
+});
+</script>
+<br><br>
+
 <img src="testing.gif" alt="pic" height="50%" width="50%">
 <br><br>
 
 
 
-
-
-
-<form action="checkbox.php" method="post">  
-<input type="checkbox" name="checked">
-<input type="submit" name="checkboxsubmit">
-</form>
 
 
 

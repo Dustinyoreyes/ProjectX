@@ -1,0 +1,15 @@
+{
+  "cols": [
+        {"type":"string"},
+        {"label":"Pieces","type":"number"}
+      ],
+  "rows": [
+        {"c":[{"v":"10/13/2015"},{"v":3}]},
+        {"c":[{"v":"Carlton"},{"v":1}]},
+        {"c":[{"v":"Cochran"},{"v":1}]},
+        {"c":[{"v":"Devaney"},{"v":1}]},
+        {"c":[{"v":"Flores"},{"v":2}]}
+      ]
+}
+
+
