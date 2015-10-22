@@ -62,7 +62,8 @@
     <li><a href='special.php'><span id="forminput" class="glyphicon glyphicon-list-alt"></span> Form Input</a></li>
    <li><a href='tasks.php'><span id="tasks" class="glyphicon glyphicon-tasks"></span> Tasks</a></li>
    <li><a href='downloads.php'><span id="downloads" class="glyphicon glyphicon-fire"></span> Downloads</a></li>
-   <li><a href='worksheet.php'><span id="Worksheet" class="glyphicon glyphicon-fire"></span> Worksheet</a></li>
+   <li><a href='worksheet.php'><span id="Worksheet" class="glyphicon glyphicon-plane"></span> Worksheet</a></li>
+   <li><a href='worksheet2.php'><span id="Worksheet2" class="glyphicon glyphicon-plane"></span> Worksheet2</a></li>
    <li class='last'><a href="mailto:wongdustin529@gmail.com?Subject=Hello%20again" target="_top"><span id="contactadmin" class="glyphicon glyphicon-envelope"></span> Contact Admin</a></li>
 </ul>
 </div>
@@ -77,6 +78,21 @@
 </div>
 <section id= "section">
 
+<div class="bs-example">
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#sectionA">Section A</a></li>
+        <li><a data-toggle="tab" href="#sectionB">Section B</a></li>
+        <li class="dropdown">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">Dropdown <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li><a data-toggle="tab" href="#dropdown1">Dropdown1</a></li>
+                <li><a data-toggle="tab" href="#dropdown2">Dropdown2</a></li>
+            </ul>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div id="sectionA" class="tab-pane fade in active">
+            <h3>Section A</h3>
 
 <br><br>
 <div>

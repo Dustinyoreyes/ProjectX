@@ -75,7 +75,8 @@ th,td {
    <li><a href='special.php'><span id="forminput" class="glyphicon glyphicon-list-alt"></span> Form Input</a></li>
    <li><a href='tasks.php'><span id="tasks" class="glyphicon glyphicon-tasks"></span> Tasks</a></li>
    <li><a href='downloads.php'><span id="downloads" class="glyphicon glyphicon-fire"></span> Downloads</a></li>
-   <li><a href='worksheet.php'><span id="Worksheet" class="glyphicon glyphicon-fire"></span> Worksheet</a></li>
+   <li><a href='worksheet.php'><span id="Worksheet" class="glyphicon glyphicon-plane"></span> Worksheet</a></li>
+   <li><a href='worksheet2.php'><span id="Worksheet2" class="glyphicon glyphicon-plane"></span> Worksheet2</a></li>
    <li class='last'><a href="mailto:wongdustin529@gmail.com?Subject=Hello%20again" target="_top"><span id="contactadmin" class="glyphicon glyphicon-envelope"></span> Contact Admin</a></li>
 </ul>
 </div>
@@ -92,23 +93,66 @@ th,td {
 </div>
 
 
-
 <section id= "section">
 
 <?php include "dbconfig_meggitt_inventory.php" ?>
   
  
  <?php 
-$query = mysqli_query($dbLink,"SELECT * FROM ytd_ship_detail");
+$query = mysqli_query($dbLink,
+"SELECT SubPl,SUM(ExtCost),NOW() 
+FROM `large_ytd_ship_detail` 
+WHERE SubPl='01F'
+UNION 
+SELECT SubPl,SUM(ExtCost),NOW() 
+FROM `large_ytd_ship_detail` 
+WHERE SubPl='01G' 
+UNION
+SELECT SubPl,SUM(ExtCost),NOW() 
+FROM `large_ytd_ship_detail` 
+WHERE SubPl='01X' 
+UNION
+SELECT SubPl,SUM(ExtCost),NOW() 
+FROM `large_ytd_ship_detail` 
+WHERE SubPl='01Y'
+UNION
+SELECT SubPl,SUM(ExtCost),NOW() 
+FROM `large_ytd_ship_detail` 
+WHERE SubPl='02P' 
+UNION
+SELECT SubPl,SUM(ExtCost),NOW() 
+FROM `large_ytd_ship_detail` 
+WHERE SubPl='04A' 
+UNION
+SELECT SubPl,SUM(ExtCost),NOW() 
+FROM `large_ytd_ship_detail` 
+WHERE SubPl='05C'
+UNION
+SELECT SubPl,SUM(ExtCost),NOW() 
+FROM `large_ytd_ship_detail` 
+WHERE SubPl='05M'
+UNION
+SELECT SubPl,SUM(ExtCost),NOW() 
+FROM `large_ytd_ship_detail` 
+WHERE SubPl='06C' 
+UNION
+SELECT SubPl,SUM(ExtCost),NOW() 
+FROM `large_ytd_ship_detail` 
+WHERE SubPl='06X'"
+);
+
+
+
+
+
 ?>
 
       <table width="80%" class="table table-hover">
                 <thead>
 				<tr>
-                    <td><b>ID</b></td>
-                    <td><b>Order#</b></td>
-                    <td><b>ShipDate</b></td>
-                    <td><b>ExtPrice</b></td>
+                    <td><b>SubPl</b></td>
+                    <td><b>ExtCost</b></td>
+					<td><b>Date</b></td>
                 </tr>
 				</thead>
 <?php 
@@ -117,10 +161,9 @@ $query = mysqli_query($dbLink,"SELECT * FROM ytd_ship_detail");
          while($row = mysqli_fetch_assoc($query)){
 ?>
                 <tr>
-                    <td><?php echo $row['ID'];?></td>
-                    <td><?php echo $row['Order#'];?></td>
-                    <td><?php echo $row['ShipDate'];?></td>
-					<td><?php echo $row['ExtPrice'];?></td>
+                    <td><?php echo $row['SubPl'];?></td>
+                    <td><?php echo $row['SUM(ExtCost)'];?></td>
+					<td><?php echo $row['NOW()'];?></td>
                 </tr>
 			
 <?php } } else { ?>
@@ -130,10 +173,9 @@ $query = mysqli_query($dbLink,"SELECT * FROM ytd_ship_detail");
 
 
 <?php
+
 //$string = file_get_contents("\wamp\www\ProjectX\userfile\ytd_ship_detail2.csv");
 //echo $string;
-
-
 
 ?>
 

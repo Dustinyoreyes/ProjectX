@@ -1,6 +1,29 @@
+//Get the sum
+SELECT SUM(ExtCost), SubPl
+FROM `large_ytd_ship_detail`  
+WHERE SubPl='01F' 
+
+//Get total sum of multiple specific value
+SELECT SUM(ExtCost), SubPl
+FROM `large_ytd_ship_detail`  
+WHERE SubPl='01F' 
+UNION
+SELECT SUM(ExtCost), SubPl
+FROM `large_ytd_ship_detail`  
+WHERE SubPl='02P' 
 
 
 
+//Find out the count
+SELECT COUNT(ExtCost) 
+AS NumberOfExtCost 
+FROM `large_ytd_ship_detail`
+
+
+
+//No Duplicates
+SELECT DISTINCT SubPl
+FROM `large_ytd_ship_detail`
 
 
 
@@ -20,7 +43,7 @@ AND Planner like 'Acosta'
 SELECT SUM(ExtCost) AS ExtendedCost FROM `planner_messages`
 
 //Update and remove comma 
-update planner_messages set extcost = REPLACE(extcost,',','')
+UPDATE planner_messages set extcost = REPLACE(extcost,',','')
 
 
 
@@ -35,4 +58,81 @@ AND xSignal <>'VM'
 AND Planner like 'Acosta'
 
 //Practice
+________________________________________
+//If you want to get the current date
+<?php 
+$query = mysqli_query($dbLink,"SELECT SubPl,ExtCost,NOW() FROM `large_ytd_ship_detail`");
+?>
+
+// Complete with specific SubPl and ExtCost and Date
+$query = mysqli_query($dbLink,
+"SELECT SubPl,SUM(ExtCost),NOW() 
+FROM `large_ytd_ship_detail` 
+WHERE SubPl='01F'
+UNION 
+SELECT SubPl,SUM(ExtCost),NOW() 
+FROM `large_ytd_ship_detail` 
+WHERE SubPl='01G' 
+UNION
+SELECT SubPl,SUM(ExtCost),NOW() 
+FROM `large_ytd_ship_detail` 
+WHERE SubPl='01X' 
+UNION
+SELECT SubPl,SUM(ExtCost),NOW() 
+FROM `large_ytd_ship_detail` 
+WHERE SubPl='01Y'
+UNION
+SELECT SubPl,SUM(ExtCost),NOW() 
+FROM `large_ytd_ship_detail` 
+WHERE SubPl='02P' 
+UNION
+SELECT SubPl,SUM(ExtCost),NOW() 
+FROM `large_ytd_ship_detail` 
+WHERE SubPl='04A' 
+UNION
+SELECT SubPl,SUM(ExtCost),NOW() 
+FROM `large_ytd_ship_detail` 
+WHERE SubPl='05C'
+UNION
+SELECT SubPl,SUM(ExtCost),NOW() 
+FROM `large_ytd_ship_detail` 
+WHERE SubPl='05M'
+UNION
+SELECT SubPl,SUM(ExtCost),NOW() 
+FROM `large_ytd_ship_detail` 
+WHERE SubPl='06C' 
+UNION
+SELECT SubPl,SUM(ExtCost),NOW() 
+FROM `large_ytd_ship_detail` 
+WHERE SubPl='06X'"
+);
+
+
+// LOAD DATA LOCAL INFILE 'C:\\wamp\\tmp\\php55B1.tmp' INTO TABLE `large_ytd_ship_detail2` FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\r\n'# 12793 rows affected.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

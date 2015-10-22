@@ -4,6 +4,18 @@ height:100%;
 }
 
 
+.span6{
+		margin: 0;
+		padding: 5px 15px;
+		font-family: Arial, Helvetica, sans-serif;
+		font-size:14px;
+		border:1px solid #0076a3; border-right:1px solid #0076a3;
+		border-top-left-radius: 5px 5px; border-top-right-radius: 5px 5px;
+		border-bottom-left-radius: 5px 5px; border-bottom-right-radius: 5px 5px;
+	}
+
+
+
 #header {
 background-color:#262931;
 font-family: Helvetica, Arial, sans-serif;
@@ -92,6 +104,7 @@ overflow:auto;
 border-style:double;
 background-color:#E6E6E6;
 padding-left:10px;
+padding-right:15px;
 padding-top:10px;
 padding-bottom:200px;
 border-color:;
@@ -353,6 +366,11 @@ padding-right:10px;
 }
 
 #downloads {
+font-size-adjust:auto;
+padding-right:10px;
+}
+
+#Worksheet2 {
 font-size-adjust:auto;
 padding-right:10px;
 }

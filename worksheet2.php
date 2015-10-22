@@ -12,8 +12,13 @@
    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
    <script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+   <script src="http://code.highcharts.com/highcharts.js"></script>
+	<script src="http://code.highcharts.com/modules/exporting.js"></script>
    <title>CSS MenuMaker</title>
 </head>
+
+
 
 
 <style>
@@ -31,7 +36,7 @@ th,td {
 <body id="body">
 <header id="header">
 <div>
-<h1 id="headtitle">Special Form Input<h1>
+<h1 id="headtitle">Worksheet2<h1>
 </div>
 
 <!-- HTML for SEARCH BAR -->
@@ -67,7 +72,6 @@ th,td {
                <li class='last'><a href='#'><span>Sub Product</span></a></li>
             </ul>
 			-->
-			
          </li>
       </ul>
    </li>
@@ -84,96 +88,36 @@ th,td {
 
 
 
-
 <div id="print">
 <span class="glyphicon glyphicon-print"></span>
 <button onclick="myFunction()" style="color:black" class="btn btn-default">Print this page</button>
 <script src="printIcon.js">
 </script>
 </div>
+
+
 <section id= "section">
 
-<form action="inputTable.php" method="post" enctype="multipart/form-data">
-<b>Today's Date:</b>
-
-<?php
-date_default_timezone_set('America/Los_Angeles');
-echo date("m/d/y");
-?>
-
-<br>
-<br>
-<b>Contract Admin:</b> <input type="text" method="post" name="contractAdmin"></input>
-<br><br>
-<b>Customer Name:</b> <input type="text" method="post" name="customerName"></input>
-<br><br>
-<b>Order #:</b> <input type="text" method="post" name="orderNumb"></input>
-<br><br>
-<input type="submit" value="Submit" id="submit"> 
-</form>
-<br><br>
-
-<script src="deleteConfirmation.js">
-</script>
 
 
 <?php
-include_once('dbConfig.php');
-$query = mysqli_query($dbLink,"SELECT * FROM namelist");
+
+include "highchartIndex.php";
+
 ?>
-
-
-      <form name="bulk_action_form" action="action.php" method="post" onsubmit="return deleteConfirm();"/>
-      <table width="80%" class="table table-hover">
-                <thead>
-				<tr>
-					<td><b>Action</b></td>
-                    <td><b>ID</b></td>
-                    <td><b>Contract Admin</b></td>
-                    <td><b>Customer Name</b></td>
-                    <td><b>Order Number</b></td>
-					<td><b>Created</b></td>
-                </tr>
-				</thead>
-
-<?php 
-      // Print each file <button onclick='alertDelete()'  class='glyphicon glyphicon-remove'></button>
-	     if(mysqli_num_rows($query) > 0){
-         while($row = mysqli_fetch_assoc($query)){
-?>
-                <tr>
-					<td><input type='checkbox' name="checked_id[]" class="checkbox" value="<?php echo $row['id'];?>"/></td>
-                    <td><?php echo $row['id'];?></td>
-                    <td><?php echo $row['contractAdmin'];?></td>
-                    <td><?php echo $row['customerName'];?></td>
-					<td><?php echo $row['orderNumb'];?></td>
-					<td><?php echo $row['Created'];?></td>
-					</form>
-                </tr>
-			
-<?php } } else { ?>
-            <tr><td colspan="5">No records found.</td></tr> 
-        <?php } ?>
-		</table>
-			<input type="submit" class="btn btn-danger" name="bulk_delete_submit" value="Delete"/>
-</form>
-
- 
-
-
-
 <br><br>
+<?php
 
+include "highchartIndexLine.php";
 
-<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">  
-  <input type="search" name="search" alt="Please click Search Table"><input type="submit" value="Search Table">
-</form>  
+?>
 
-<?php include "search.php";?>
+<?php
 
+include "highchartIndexSpecific.php";
 
+?>
 </section>
-
 
 
 </body>
