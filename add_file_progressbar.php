@@ -19,11 +19,11 @@
 <?php
 
 //CREATE A CONNECTION using Procedural Style
-$conn = mysqli_connect('localhost', 'root', 'root','forecast');
-$name = mysqli_real_escape_string($conn, $_FILES['uploaded_file']['name']);
-$mime = mysqli_real_escape_string($conn, $_FILES['uploaded_file']['type']);
-$data = mysqli_real_escape_string($conn, file_get_contents($_FILES ['uploaded_file']['tmp_name']));
-$size = Intval($_FILES['uploaded_file']['size']);
+$conn = mysqli_connect('localhost', 'root', '','forecast');
+$name = mysqli_real_escape_string($conn, $_FILES['myfile']['name']);
+$mime = mysqli_real_escape_string($conn, $_FILES['myfile']['type']);
+$data = mysqli_real_escape_string($conn, file_get_contents($_FILES ['myfile']['tmp_name']));
+$size = Intval($_FILES['myfile']['size']);
 
 
 
@@ -91,7 +91,7 @@ echo "<br>";
 echo "<br><br>";
 
  // Connect to the database
-$dbLink = new mysqli('127.0.0.1', 'root', 'root', 'forecast');
+$dbLink = new mysqli('127.0.0.1', 'root', '', 'forecast');
 if(mysqli_connect_errno()) {
     die("MySQL connection failed: ". mysqli_connect_error());
 }

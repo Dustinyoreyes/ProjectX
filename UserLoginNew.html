@@ -75,7 +75,7 @@
  </script>
 
 		<div ng-app="myapp">
-		<form method="post" name="myForm"  action="Registrant_Processing.php">
+		<form method="post" name="myForm" action="Registrant_Processing.php">
 		
 			<input type="text" id="name" class="span6" name="name" placeholder=" First Name..." ng-model="formData.name" required/>
 				<span ng-show="myForm.name.$error.required && myForm.name.$dirty" style="color:red"> *Required</span>
@@ -113,13 +113,8 @@
        <br /><br>
        
 	   
-	    <script>
-
-
-    	</script>
-	  	   
-	   
-	      <button id="submitBtn" class="btn btn-primary" data-toggle="modal" name="register" type="submit" class="btn" ng-enabled="!myForm.$valid">Submit</button>
+	   	    
+  <button class="btn btn-primary" data-toggle="modal" name="register" type="submit" class="btn" ng-enabled="!myForm.$valid">Submit</button>
 	
 <!--	
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -138,20 +133,17 @@
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
-
+    
   </div>
-
+ 
 </div>
 -->
 	
 	
 	
 	
-	
-	
 	</form>
-						
-			</div>				
+		</div>									
                     </div>
                 </div>
             </div>

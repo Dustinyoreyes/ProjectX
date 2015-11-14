@@ -111,11 +111,16 @@ WHERE SubPl='06X'"
 // LOAD DATA LOCAL INFILE 'C:\\wamp\\tmp\\php55B1.tmp' INTO TABLE `large_ytd_ship_detail2` FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\r\n'# 12793 rows affected.
 
 
+//Filter for multiple conditions
+SELECT *
+FROM `planner_messages` 
+WHERE (Planner='Acosta' AND Exception='Orders to be rescheduled out' AND SupplyType='Discrete job' AND days NOT BETWEEN -7 AND 7)
 
 
 
-
-
+SELECT COUNT(*) AS "Message_Count"
+FROM `planner_messages` 
+WHERE (Planner='Acosta' AND Exception='Orders to be rescheduled out' AND SupplyType='Discrete job' AND days NOT BETWEEN -7 AND 7)
 
 
 

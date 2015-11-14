@@ -4,18 +4,22 @@
    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" type="text/css" href="/css/normalize.css?update_06092015"/>
    <link rel="stylesheet" href="styles.css">
    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
    <script src="script.js"></script>
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
    <script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+   <script src="http://code.highcharts.com/highcharts.js"></script>
+	<script src="http://code.highcharts.com/modules/exporting.js"></script>
    <title>CSS MenuMaker</title>
+   <link rel="stylesheet" type="text/css" href="RegistrationFormCSS.css"></link>
 </head>
-
 
 <style>
 table, th,td {
@@ -30,7 +34,7 @@ th,td {
 
 
 <body id="body">
-<header id="header">
+<header id="header"><h5><a style="float:right" id="logout" href="UserLogin.html"> Log Out</a></h5>
 <div>
 <h1 id="headtitle">Worksheet<h1>
 </div>
@@ -75,8 +79,9 @@ th,td {
    <li><a href='special.php'><span id="forminput" class="glyphicon glyphicon-list-alt"></span> Form Input</a></li>
    <li><a href='tasks.php'><span id="tasks" class="glyphicon glyphicon-tasks"></span> Tasks</a></li>
    <li><a href='downloads.php'><span id="downloads" class="glyphicon glyphicon-fire"></span> Downloads</a></li>
-   <li><a href='worksheet.php'><span id="Worksheet" class="glyphicon glyphicon-plane"></span> Worksheet</a></li>
-   <li><a href='worksheet2.php'><span id="Worksheet2" class="glyphicon glyphicon-plane"></span> Worksheet2</a></li>
+   <li><a href='worksheet.php'><span id="Worksheet" class="glyphicon glyphicon-star"></span> Worksheet</a></li>
+   <li><a href='worksheet2.php'><span id="Worksheet2" class="glyphicon glyphicon-star"></span> Worksheet2</a></li>
+   <li><a href='worksheet3.php'><span id="Worksheet3" class="glyphicon glyphicon-star"></span> Worksheet3</a></li>
    <li class='last'><a href="mailto:wongdustin529@gmail.com?Subject=Hello%20again" target="_top"><span id="contactadmin" class="glyphicon glyphicon-envelope"></span> Contact Admin</a></li>
 </ul>
 </div>
@@ -86,8 +91,7 @@ th,td {
 
 
 <div id="print">
-<span class="glyphicon glyphicon-print"></span>
-<button onclick="myFunction()" style="color:black" class="btn btn-default">Print this page</button>
+<button onclick="myFunction()" style="color:black" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> Print</button>
 <script src="printIcon.js">
 </script>
 </div>
@@ -178,12 +182,146 @@ WHERE SubPl='06X'"
 //echo $string;
 
 ?>
+<br><br>
 
+<!--
+<script type="text/javascript">
+$(function() {
+
+    var loading = function() {
+        // add the overlay with loading image to the page
+        var over = '<div id="overlay">' +
+            '<img id="loading" src="http://bit.ly/pMtW1K">' +
+            '</div>';
+        $(over).appendTo('body');
+
+        // click on the overlay to remove it
+        $('#overlay').click(function() {
+           $(this).remove();
+        });
+
+        // hit escape to close the overlay
+        $(document).keyup(function(e) {
+            if (e.which === 27) {
+                $('#overlay').remove();
+            }
+        });
+    };
+
+    // you won't need this button click
+    // just call the loading function directly
+    $('button').click(loading);
+
+});
+</script>
+-->
+
+
+<br><br>
+
+
+<!--
+<button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Trigger Modal in iFrame</button>
+
+
+<br><br>
+<form method="post">
+
+<input type="submit" value="submit" class="btn btn-primary" data-toggle="modal" data-target="#myModal"></input>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		<br>
+      </div>
+	  
+      <div class="modal-body">
+           <h4 class="modal-title" id="myModalLabel">You Have Successfully Registered</h4>
+      </div>
+      
+	  <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+						
+						
+ </form>
+ -->
  
  
  
  
+ <br><br><br>
+ <!--
+ <script>
+ $('#submitBtn').click(function() {
+     $('#lname').html($('#lastname').val());
+     $('#fname').html($('#firstname').val());
+});
+
+$('#submit').click(function(){
+    alert('submitting');
+    $('#formfield').submit();
+});
  
+ 
+ </script>
+ 
+ 
+ 
+ <form role="form" id="formfield" action="inc/Controller/OperatorController.php" method="post"  enctype="multipart/form-data" onsubmit="return validateForm();">
+<input type="hidden" name="action" value="add_form" /> 
+
+       <div class="form-group">
+         <label>Last Name</label><span class="label label-danger">*required</span>
+         <input class="form-control" placeholder="Enter Last Name" name="lastname" id="lastname">
+       </div>
+
+        <div class="form-group">
+          <label>First Name</label><span class="label label-danger">*required</span>
+          <input class="form-control" placeholder="Enter First Name" name="firstname" id="firstname">
+       </div>
+
+            <input type="button" name="btn" value="Submit" id="submitBtn" data-toggle="modal" data-target="#confirm-submit" class="btn btn-default" />
+  <input type="button" name="btn" value="Reset" onclick="window.location='fillup.php'" class="btn btn-default" data-modal-type="confirm"/>
+</form>
+
+<div class="modal fade" id="confirm-submit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                Confirm Submit
+            </div>
+            <div class="modal-body">
+                Are you sure you want to submit the following details?
+                <table class="table">
+                    <tr>
+                        <th>Last Name</th>
+                        <td id="lname"></td>
+                    </tr>
+                    <tr>
+                        <th>First Name</th>
+                        <td id="fname"></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <a href="#" id="submit" class="btn btn-success success">Submit</a>
+            </div>
+        </div>
+    </div>
+</div>
+ 
+ <br><br>
+ 
+ -->
+
  
  
  </section>

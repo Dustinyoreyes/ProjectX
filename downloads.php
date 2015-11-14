@@ -33,7 +33,7 @@ th,td {
 
 
 <body id="body">
-<header id="header">
+<header id="header"><h5><a style="float:right" id="logout" href="UserLogin.html"> Log Out</a></h5>
 <div>
 <h1 id="headtitle">Downloads<h1>
 </div>
@@ -78,8 +78,9 @@ th,td {
    <li><a href='special.php'><span id="forminput" class="glyphicon glyphicon-list-alt"></span> Form Input</a></li>
    <li><a href='tasks.php'><span id="tasks" class="glyphicon glyphicon-tasks"></span> Tasks</a></li>
    <li><a href='downloads.php'><span id="downloads" class="glyphicon glyphicon-fire"></span> Downloads</a></li>
-   <li><a href='worksheet.php'><span id="Worksheet" class="glyphicon glyphicon-plane"></span> Worksheet</a></li>
-   <li><a href='worksheet2.php'><span id="Worksheet2" class="glyphicon glyphicon-plane"></span> Worksheet2</a></li>
+   <li><a href='worksheet.php'><span id="Worksheet" class="glyphicon glyphicon-star"></span> Worksheet</a></li>
+   <li><a href='worksheet2.php'><span id="Worksheet2" class="glyphicon glyphicon-star"></span> Worksheet2</a></li>
+   <li><a href='worksheet3.php'><span id="Worksheet3" class="glyphicon glyphicon-star"></span> Worksheet3</a></li>
    <li class='last'><a href="mailto:wongdustin529@gmail.com?Subject=Hello%20again" target="_top"><span id="contactadmin" class="glyphicon glyphicon-envelope"></span> Contact Admin</a></li>
 </ul>
 </div>
@@ -89,8 +90,7 @@ th,td {
 
 
 <div id="print">
-<span class="glyphicon glyphicon-print"></span>
-<button onclick="myFunction()" style="color:black" class="btn btn-default">Print this page</button>
+<button onclick="myFunction()" style="color:black" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> Print</button>
 <script src="printIcon.js">
 </script>
 </div>

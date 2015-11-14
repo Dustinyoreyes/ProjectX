@@ -4,17 +4,22 @@
    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" type="text/css" href="/css/normalize.css?update_06092015"/>
    <link rel="stylesheet" href="styles.css">
    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
    <script src="script.js"></script>
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
    <script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+   <script src="http://code.highcharts.com/highcharts.js"></script>
+	<script src="http://code.highcharts.com/modules/exporting.js"></script>
    <title>CSS MenuMaker</title>
+   <link rel="stylesheet" type="text/css" href="RegistrationFormCSS.css"></link>
 </head>
-
 
 <style>
 table, th,td {
@@ -31,7 +36,7 @@ th,td {
 <body id="body">
 <header id="header"><h5><a style="float:right" id="logout" href="UserLogin.html"> Log Out</a></h5>
 <div>
-<h1 id="headtitle">Special Form Input<h1>
+<h1 id="headtitle">Worksheet 3<h1>
 </div>
 
 <!-- HTML for SEARCH BAR -->
@@ -84,6 +89,7 @@ th,td {
 
 
 
+
 <section id= "section">
 
 <div id="print">
@@ -94,87 +100,17 @@ th,td {
 
 
 
-<form action="inputTable.php" method="post" enctype="multipart/form-data">
-<b>Today's Date:</b>
-
-<?php
-date_default_timezone_set('America/Los_Angeles');
-echo date("m/d/y");
-?>
-
-<br>
-<br>
-<b>Contract Admin:</b> <input type="text" method="post" name="contractAdmin"></input>
-<br><br>
-<b>Customer Name:</b> <input type="text" method="post" name="customerName"></input>
-<br><br>
-<b>Order #:</b> <input type="text" method="post" name="orderNumb"></input>
-<br><br>
-<input type="submit" value="Submit" id="submit"> 
-</form>
-<br><br>
-
-<script src="deleteConfirmation.js">
-</script>
 
 
-<?php
-include_once('dbConfig.php');
-$query = mysqli_query($dbLink,"SELECT * FROM namelist");
-?>
 
 
-      <form name="bulk_action_form" action="action.php" method="post" onsubmit="return deleteConfirm();"/>
-      <table width="80%" class="table table-hover">
-                <thead>
-				<tr>
-					<td><b>Action</b></td>
-                    <td><b>ID</b></td>
-                    <td><b>Contract Admin</b></td>
-                    <td><b>Customer Name</b></td>
-                    <td><b>Order Number</b></td>
-					<td><b>Created</b></td>
-                </tr>
-				</thead>
 
-<?php 
-      // Print each file <button onclick='alertDelete()'  class='glyphicon glyphicon-remove'></button>
-	     if(mysqli_num_rows($query) > 0){
-         while($row = mysqli_fetch_assoc($query)){
-?>
-                <tr>
-					<td><input type='checkbox' name="checked_id[]" class="checkbox" value="<?php echo $row['id'];?>"/></td>
-                    <td><?php echo $row['id'];?></td>
-                    <td><?php echo $row['contractAdmin'];?></td>
-                    <td><?php echo $row['customerName'];?></td>
-					<td><?php echo $row['orderNumb'];?></td>
-					<td><?php echo $row['Created'];?></td>
-					</form>
-                </tr>
-			
-<?php } } else { ?>
-            <tr><td colspan="5">No records found.</td></tr> 
-        <?php } ?>
-		</table>
-			<input type="submit" class="btn btn-danger" name="bulk_delete_submit" value="Delete"/>
-</form>
+
+
 
  
-
-
-
-<br><br>
-
-
-<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">  
-  <input type="search" name="search" alt="Please click Search Table"><input type="submit" value="Search Table">
-</form>  
-
-<?php include "search.php";?>
-
-
-</section>
-
+ 
+ </section>
 
 
 </body>

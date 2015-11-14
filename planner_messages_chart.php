@@ -1,60 +1,45 @@
 
 
-<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+<div id="container4" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
 
 <?php 
  // Connect to the database
-$dbLink = new mysqli('127.0.0.1', 'root', 'root', 'meggitt_inventory');
+$dbLink = new mysqli('127.0.0.1', 'root', 'root', 'db_highcharts');
 if(mysqli_connect_errno()) {
     die("MySQL connection failed: ". mysqli_connect_error());
 }
 
 $result= mysqli_query($dbLink,
-"SELECT SubPl,SUM(ExtCost) 
-FROM `large_ytd_ship_detail` 
-WHERE SubPl='01F'
-UNION 
-SELECT SubPl,SUM(ExtCost) 
-FROM `large_ytd_ship_detail` 
-WHERE SubPl='01G' 
-UNION
-SELECT SubPl,SUM(ExtCost) 
-FROM `large_ytd_ship_detail` 
-WHERE SubPl='01X' 
-UNION
-SELECT SubPl,SUM(ExtCost) 
-FROM `large_ytd_ship_detail` 
-WHERE SubPl='01Y'
-UNION
-SELECT SubPl,SUM(ExtCost) 
-FROM `large_ytd_ship_detail` 
-WHERE SubPl='02P' 
-UNION
-SELECT SubPl,SUM(ExtCost) 
-FROM `large_ytd_ship_detail` 
-WHERE SubPl='04A' 
-UNION
-SELECT SubPl,SUM(ExtCost) 
-FROM `large_ytd_ship_detail` 
-WHERE SubPl='05C'
-UNION
-SELECT SubPl,SUM(ExtCost) 
-FROM `large_ytd_ship_detail` 
-WHERE SubPl='05M'
-UNION
-SELECT SubPl,SUM(ExtCost) 
-FROM `large_ytd_ship_detail` 
-WHERE SubPl='06C' 
-UNION
-SELECT SubPl,SUM(ExtCost) 
-FROM `large_ytd_ship_detail` 
-WHERE SubPl='06X'"
+
+
+"SELECT
+  Planner,
+COUNT(
+CASE WHEN(
+days NOT BETWEEN -7 AND -1
+AND 
+days NOT BETWEEN 1 AND 7
+AND
+SupplyType='Discrete job'
+AND xSignal NOT LIKE '%DCI%'
+AND xSignal NOT LIKE '%KB%'
+AND xSignal NOT LIKE '%KB-PRESS%'
+AND xSignal NOT LIKE '%VM%'
+) 
+THEN Planner ELSE NULL END) AS 'TOTAL'
+
+FROM
+  planner_messages
+
+GROUP BY Planner
+"
 
 );
  while($row = mysqli_fetch_array($result)) {
-	 $data[] = $row['SUM(ExtCost)'];
-	 $subpl[] = $row['SubPl'];
+	 $data3[] = $row['TOTAL'];
+	 $planner[] = $row['Planner'];
+
  }
 
  
@@ -68,12 +53,12 @@ WHERE SubPl='06X'"
 
 
     $(function () {
-            $('#container').highcharts({
+            $('#container4').highcharts({
                 chart: {
-                    type: 'column'
+                    type: 'line'
                 },
                 title: {
-                    text: 'Total Amount per SubPl'
+                    text: 'Planner Messages'
                 },
                 subtitle: {
                     text: ''
@@ -81,20 +66,20 @@ WHERE SubPl='06X'"
                 xAxis: {
                     categories: [
 					   //'01F', '01G', '01X','01Y','02P','04A','05C','05M','06C','06X'
-					 '<?php echo implode("','", $subpl); ?>'
+					 '<?php echo implode("','", $planner); ?>'
 					  
                     ]
                 },
                 yAxis: {
                     min: 0,
                     title: {
-                        text: 'Amount ($)'
+                        text: 'Number of Messages'
                     }
                 },
                 tooltip: {
                     headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
                     pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                        '<td style="padding:0"><b>${point.y:.1f}</b></td></tr>',
+                        '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
                     footerFormat: '</table>',
                     shared: true,
                     useHTML: true
@@ -111,8 +96,8 @@ WHERE SubPl='06X'"
                     }
                 },
                 series: [{
-                    name: 'Total',
-                    data: [<?php echo join($data, ',') ?>]
+                    name: 'Total Count',
+                    data: [<?php echo join($data3, ',') ?>]
                 }]
             });
         });
