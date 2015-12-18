@@ -10,7 +10,7 @@
 </head>
 <body style="background-color:#E6E6E6";>
 <p>
-      <button onclick="location.href = 'http://localhost/projectx/index.php#';" id="myHomeButton" class="glyphicon glyphicon-home"> Home</button>
+      <button class="btn btn-primary" onclick="location.href = 'http://localhost/projectx/index.php#';" id="myHomeButton" class="glyphicon glyphicon-home"> Home</button>
 </p>
 
 <script type="text/javascript">
@@ -23,7 +23,7 @@
  <?php
  
  // Connect to the database
-$dbLink = new mysqli('127.0.0.1', 'root', '', 'forecast');
+$dbLink = new mysqli('127.0.0.1', 'root', 'root', 'forecast');
 if(mysqli_connect_errno()) {
     die("MySQL connection failed: ". mysqli_connect_error());
 }
@@ -84,7 +84,7 @@ $dbLink->close();
  
 
  <p>
-      <button onclick="location.href = 'http://localhost/projectx/index.php#';" id="myHomeButton" class="glyphicon glyphicon-home"> Home</button>
+      <button class="btn btn-primary" onclick="location.href = 'http://localhost/projectx/index.php#';" id="myHomeButton" class="glyphicon glyphicon-home"> Home</button>
 </p>
 
 <script type="text/javascript">

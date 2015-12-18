@@ -14,12 +14,14 @@
    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
    <script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
    <script src="http://code.highcharts.com/highcharts.js"></script>
 	<script src="http://code.highcharts.com/modules/exporting.js"></script>
    <title>CSS MenuMaker</title>
    <link rel="stylesheet" type="text/css" href="RegistrationFormCSS.css"></link>
 </head>
+<body id="">
 
 <style>
 table, th,td {
@@ -31,28 +33,74 @@ th,td {
 }
 </style>
 
+<nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+		<div class="navbar-header">
+<!--		
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+			</button>
+-->        
+		<a class="navbar-brand" href="#">Project X</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="index.php">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact Admin</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href='special.php'><span id="forminput" class="glyphicon glyphicon-list-alt"></span> Form Input</a></li>
+                <li><a href='worksheet2.php'><span id="Worksheet2" class="fa fa-bar-chart"></span> Data Display</a></li>
+                <li><a href="#">Something else here</a></li>
+				<li><a href="#">Something else here</a></li>
+				<li><a href="#">Something else here</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">File Upload</li>
+                <li><a href="FileUploadNavDatabase.php">Database</span></a></li>
+                <li><a href="FileUploadNavLocal.php">Local Server</span></li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+			<ul class="active"><a href="./"><span class="sr-only">(current)</span></a></ul>
+            <li class="active"><a href="./">Account <span class="sr-only">(current)</span></a></li>
+			<li class=""><a href="">Settings </a></li>
+            <li><a style="" href="UserLogin.html"> Log Out</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
 
 
-<body id="body">
+
+
+
+<!--
 <header id="header"><h5><a style="float:right" id="logout" href="UserLogin.html"> Log Out</a></h5>
 <div>
 <h1 id="headtitle">Worksheet 3<h1>
 </div>
 
-<!-- HTML for SEARCH BAR -->
+<!-- HTML for SEARCH BAR
 	<div id="tfheader" style="color:black" class="panel panel-default">
 		<form id="tfnewsearch" method="get" action="http://www.google.com/" target="_blank">
 		        <input type="text" class="tftextinput" name="q" size="50" maxlength="130"><input type="submit" value="Search" class="tfbutton">
 		</form>
 	<div class="tfclear"></div>
 	</div>
-	
+
 </header>
+-->	
+
 
 <aside id="asidemenu">
 <div id='cssmenu'>
 <ul>
-   <li><a href="index.php"><span id="home" class="glyphicon glyphicon-home"></span> Home</a></li>
    <li class='active has-sub'><a href='#'><span id="fileupload" class="glyphicon glyphicon-file"></span> File Upload</a>
       <ul>
          <li class='has-sub'><span><a href="FileUploadNavDatabase.php">Upload to database</span></a>
@@ -77,12 +125,12 @@ th,td {
       </ul>
    </li>
    <li><a href='special.php'><span id="forminput" class="glyphicon glyphicon-list-alt"></span> Form Input</a></li>
-   <li><a href='tasks.php'><span id="tasks" class="glyphicon glyphicon-tasks"></span> Tasks</a></li>
+   <li><a href='tasks.php'><span id="tasks" class="fa fa-download"></span> Tasks</a></li>
    <li><a href='downloads.php'><span id="downloads" class="glyphicon glyphicon-fire"></span> Downloads</a></li>
-   <li><a href='worksheet.php'><span id="Worksheet" class="glyphicon glyphicon-star"></span> Worksheet</a></li>
-   <li><a href='worksheet2.php'><span id="Worksheet2" class="glyphicon glyphicon-star"></span> Worksheet2</a></li>
+   <li><a href='worksheet.php'><span id="Worksheet" class="fa fa-table"></span> Worksheet</a></li>
+   <li><a href='worksheet2.php'><span id="Worksheet2" class="fa fa-bar-chart"></span> Worksheet2</a></li>
    <li><a href='worksheet3.php'><span id="Worksheet3" class="glyphicon glyphicon-star"></span> Worksheet3</a></li>
-   <li class='last'><a href="mailto:wongdustin529@gmail.com?Subject=Hello%20again" target="_top"><span id="contactadmin" class="glyphicon glyphicon-envelope"></span> Contact Admin</a></li>
+   <li class='last'><a href="mailto:wongdustin529@gmail.com?Subject=Hello%20again" target="_top"><span id="contactadmin" class="fa fa-envelope"></span> Contact Admin</a></li>
 </ul>
 </div>
 </aside>
@@ -92,17 +140,9 @@ th,td {
 
 <section id= "section">
 
-<div id="print">
-<button onclick="myFunction()" style="color:black" class="btn btn-default"><span class="glyphicon glyphicon-print"></span> Print</button>
-<script src="printIcon.js">
-</script>
-</div>
 
 
-
-
-
-
+Icons: http://fortawesome.github.io/Font-Awesome/icons/
 
 
 

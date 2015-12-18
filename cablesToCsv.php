@@ -33,46 +33,46 @@ if(mysqli_connect_errno()) {
 }
 
 
-$truncate = "TRUNCATE TABLE Planner_Messages";
+//$truncate = "TRUNCATE TABLE Planner_Messages";
 
-if ($dbLink->query($truncate)===TRUE) {
+//if ($dbLink->query($truncate)===TRUE) {
 	
 
 
 
-/*****
-$sql = "CREATE TABLE Planner_Messages (
+/***
+$sql = "CREATE TABLE Cables (
 id INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-MrpDate DATE,
-Org varchar(40),
-PlnrCd varchar(40),
-Planner varchar(40),
-ExCd varchar(40),
-Exception varchar(40),
-days varchar(40),
-Item varchar(40),
+GLClass varchar(40),
+xCustomer varchar(40),
+CommodityClass varchar(40),
+BookingType varchar(40),
+DomFor varchar(40),
+ContractAdministrator varchar(40),
+PO_num varchar(40),
+OrderNum varchar(40),
+LineNum varchar(40),
+PartNum varchar(40),
 Description varchar(40),
-MakeBuy varchar(40),
-xSignal varchar(40),
-Buyer varchar(40),
-SupplyType varchar(40),
-xOrder varchar(40),
-Quantity INT (15),
-DueDate DATE,
-FromDate DATE,
-ToDate DATE, 
-ExtCost varchar(40),
-StdCst varchar(40),
-Vendor varchar(40),
-VendNum varchar(40)
+ShipDate DATE,
+DockDate DATE,
+StockDate DATE,
+OrderQty INT (15),
+ExtendedAmount varchar(40),
+ExtendedCost varchar(40),
+HoldDesc varchar(40), 
+PickSlip varchar(40),
+Expedite_Code varchar(40),
+PlannerNum varchar(40),
+GLClass2 varchar(40)
 )";
 
 if ($dbLink->query($sql) === TRUE) {
-	echo "Table Planner_Messages created successfully";
+	echo "Table Cables created successfully";
 } else {echo "Error creating table: ". $dbLink->error;
 }
  $dbLink->close();
-***/
+**/
 
 	
     $file = $_FILES['uploaded_file']['tmp_name'];
@@ -82,73 +82,74 @@ if ($dbLink->query($sql) === TRUE) {
 	
  while(($filesop = fgetcsv($handle,1000, ",")) !== false) {
  
-$mrpdate = $filesop[0];
-$org = $filesop[1];
-$plnrdc = $filesop[2];
-$planner = $filesop[3];
-$excd = $filesop[4];
-$exception = $filesop[5];
-$days = $filesop[6];
-$item = $filesop[7];
-$description = mysqli_real_escape_string($dbLink,$filesop[8]);
-$makebuy = $filesop[9];
-$xsignal = $filesop[10];
-$buyer = $filesop[11];
-$supplytype = $filesop[12];
-$xorder = $filesop[13];
-$quantity = $filesop[14];
-$duedate = $filesop[15];
-$fromdate = $filesop[16];
-$todate = $filesop[17];
-$extcost = $filesop[18];
-$stdcst = $filesop[19];
-$vendor = $filesop[20];
-$vendnum = $filesop[21];
  
+$GLClass = $filesop[1];
+$xCustomer = $filesop[2];
+$CommodityClass = $filesop[3];
+$BookingType = $filesop[4];
+$DomFor = $filesop[5];
+$ContractAdministrator = $filesop[6];
+$PO_num = $filesop[7];
+$OrderNum = $filesop[8];
+$LineNum = $filesop[9];
+$PartNum = $filesop[10];
+$Description = $filesop[11];
+$ShipDate = $filesop[12];
+$DockDate = $filesop[13];
+$StockDate = $filesop[14];
+$OrderQty = $filesop[15];
+$ExtendedAmount = $filesop[16];
+$ExtendedCost = $filesop[17];
+$HoldDesc = $filesop[18];
+$PickSlip = $filesop[19];
+$Expedite_Code = $filesop[20];
+$PlannerNum = $filesop[21];
+$GLClass2 = $filesop[22];
  
+
  
   $query = "
-            INSERT INTO Planner_Messages (
-                 MrpDate, Org, PlnrCd, Planner, ExCd, Exception, days, Item, Description, MakeBuy, xSignal, Buyer, SupplyType, xOrder, Quantity, DueDate, FromDate, ToDate, ExtCost, StdCst, Vendor, VendNum				
+			INSERT INTO Cables (
+                 GLClass, xCustomer, CommodityClass, BookingType, DomFor, ContractAdministrator, PO_num, OrderNum, LineNum, PartNum , Description, ShipDate, DockDate, StockDate, OrderQty, ExtendedAmount, ExtendedCost, HoldDesc, PickSlip, Expedite_Code, PlannerNum, GLClass2				
             )
             VALUES (
-               '{$mrpdate}', '{$org}', '{$plnrdc}', '{$planner}', '{$excd}', '{$exception}', '{$days}', '{$item}', '{$description}', 
-				'{$makebuy}', '{$xsignal}', '{$buyer}', '{$supplytype}', '{$xorder}', '{$quantity}','{$duedate}', '{$fromdate}',
-					'{$todate}','{$extcost}', '{$stdcst}', '{$vendor}','{$vendnum}'   
+               '{$GLClass}', '{$xCustomer}', '{$CommodityClass}', '{$BookingType}', '{$DomFor}', '{$ContractAdministrator}', '{$PO_num}', '{$OrderNum}', '{$LineNum}', 
+				'{$PartNum}', '{$Description}', '{$ShipDate}', '{$DockDate}', '{$StockDate}', '{$OrderQty}','{$ExtendedAmount}', '{$ExtendedCost}',
+					'{$HoldDesc}','{$PickSlip}', '{$Expedite_Code}', '{$PlannerNum}','{$GLClass2}'   
             )
+			
 			";
-	$deletefirstrow = "DELETE FROM Planner_Messages WHERE id=1";		
+	//$deletefirstrow = "DELETE FROM Cables WHERE id=1";		
   			
-   $createTable = "CREATE TABLE IF NOT EXISTS newtable LIKE Planner_Messages; 
-			";
-	$insertTable = "INSERT newtable SELECT * FROM Planner_Messages; ";	
-	$tableCheck = "SELECT 2 FROM Planner_Messages LIMIT 1";
+    //$createTable = "CREATE TABLE IF NOT EXISTS newtable LIKE Planner_Messages;";
+	//$insertTable = "INSERT newtable SELECT * FROM Planner_Messages; ";	
+	//$tableCheck = "SELECT 2 FROM Planner_Messages LIMIT 1";
 	
  // ALTER TABLE my_old_db.mytable RENAME my_new_db.mytable
 	
 	
         // Execute the query
         $result = $dbLink->query($query);
-		$headerRemoved = $dbLink->query($deletefirstrow);
+	//	$headerRemoved = $dbLink->query($deletefirstrow);
  }
         // Check if it was successful
-        if($result && $headerRemoved===TRUE) {
+        if($result===TRUE) {
             echo 'Your file was successfully added!';
         }
         else {
             echo 'Error! Failed to insert the file'
                . "<pre>{$dbLink->error}</pre>";
         } 
-}
+//}
  
-	$tableCreation = $dbLink->query($createTable);
-	$copyTable = $dbLink->query($insertTable);
+//	$tableCreation = $dbLink->query($createTable);
+//	$copyTable = $dbLink->query($insertTable);
                                                                                                                                                                    
-if($tableCreation && $copyTable === TRUE) {
-	echo ' Table successfully created';
-} else {
-	echo ' error';
-}
+//if($tableCreation && $copyTable === TRUE) {
+//	echo ' Table successfully created';
+//} else {
+//	echo ' error';
+//}
 
 // Close the mysql connection
     $dbLink->close();

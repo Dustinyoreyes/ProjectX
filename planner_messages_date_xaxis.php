@@ -1,6 +1,6 @@
 
 
-<div id="container4" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+<div id="container5" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
 
 <?php 
@@ -11,37 +11,31 @@ if(mysqli_connect_errno()) {
 }
 
 $result= mysqli_query($dbLink,
+"
+SELECT MrpDate,
 
-
-"SELECT
-  Planner,
-COUNT(
+SUM(
 CASE WHEN(
-days NOT BETWEEN -7 AND -1
-AND 
-days NOT BETWEEN 1 AND 7
-AND
+
 SupplyType='Discrete job'
+AND days NOT BETWEEN -7 AND -1
+AND days NOT BETWEEN 1 AND 7
 AND xSignal NOT LIKE '%DCI%'
 AND xSignal NOT LIKE '%KB%'
 AND xSignal NOT LIKE '%KB-PRESS%'
 AND xSignal NOT LIKE '%VM%'
 ) 
-THEN Planner ELSE NULL END) AS 'TOTAL'
+THEN ExtCost ELSE NULL END) AS 'Total_Cost'
 
 FROM
   planner_messages
 
-GROUP BY Planner
 "
+
 );
-
-
-
  while($row = mysqli_fetch_array($result)) {
-	 $data3[] = $row['TOTAL'];
-	 $planner[] = $row['Planner'];
-
+	 $data4[] = $row['Total_Cost'];
+	 $planner[] = $row['MrpDate'];
  }
 
  
@@ -55,32 +49,32 @@ GROUP BY Planner
 
 
     $(function () {
-            $('#container4').highcharts({
+	
+            $('#container5').highcharts({
                 chart: {
                     type: 'line'
                 },
                 title: {
-                    text: 'Planner Messages'
+                    text: 'Total Cost of Messages'
                 },
                 subtitle: {
                     text: ''
                 },
                 xAxis: {
-                    categories: [
-					   //'01F', '01G', '01X','01Y','02P','04A','05C','05M','06C','06X'
-					 '<?php echo implode("','", $planner); ?>'
-                    ]
+                    type: 'datetime',
+					
+					
                 },
                 yAxis: {
                     min: 0,
                     title: {
-                        text: 'Number of Messages'
+                        text: 'Amount ($)'
                     }
                 },
                 tooltip: {
                     headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
                     pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                        '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+                        '<td style="padding:0"><b>${point.y:.1f}</b></td></tr>',
                     footerFormat: '</table>',
                     shared: true,
                     useHTML: true
@@ -97,8 +91,10 @@ GROUP BY Planner
                     }
                 },
                 series: [{
-                    name: 'Total Count',
-                    data: [<?php echo join($data3, ',') ?>]
+					pointStart: Date.UTC(2015, 11, 1),
+					pointInterval: 1000 * 60 * 60 * 60,
+                    name: 'Total',
+                    data: [<?php echo join($data4, ',') ?>,<?php echo join($data4, ',') ?>,<?php echo join($data4, ',')?>]
                 }]
             });
         });

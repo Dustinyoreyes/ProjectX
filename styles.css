@@ -1,3 +1,10 @@
+
+	
+	
+#loadIcon {
+	width: 100px;
+}
+
 .planner1{
 	background-color: #608dbd;
 }
@@ -29,24 +36,23 @@
 
 
 
-#overlay {
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    background: #000;
-    opacity: 0.8;
-    filter: alpha(opacity=80);
+#load {
+  opacity:    0.5; 
+  background: #000; 
+  width:      100%;
+  height:     100%; 
+  z-index:    10;
+  top:        0; 
+  left:       0; 
+  position:   fixed;
+
+color: white;
+text-align:center;
+line-height:300px;
+font-family:"Trebuchet MS", verdana, arial,tahoma;
+font-size:25pt;
 }
-#loading {
-    width: 50px;
-    height: 57px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin: -28px 0 0 -25px;
-}
+
 
 
 
@@ -58,6 +64,7 @@
 #body {
 background-color: #262931;
 height:100%;
+font-family: proxima-nova, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 
@@ -155,10 +162,10 @@ margin-left:15px;
 
 
 #section {
-display:inline;
+display:inline-block;
 display:inherit;
 overflow:auto;
-border-style:double;
+border-style:;
 background-color:#E6E6E6;
 padding-left:10px;
 padding-right:15px;
@@ -171,7 +178,7 @@ border-color:;
 float:left;
 }
 #asidemenu {
-border-style:double;
+border-style:;
 float:left;
 
 }
